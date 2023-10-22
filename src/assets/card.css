@@ -23,20 +23,6 @@
         width: 140px;
     }
     .card-body p{
-        font-size: 10px;
-    }
-}
-@media screen and (max-width: 310px) {
-    .card {
-        width: 110px;
-    }
-    .card-body{
-        width: 100px;
-    }
-    .card-body h3{
-        font-size: 9px;
-    }
-    .card-body p{
-        font-size: 7px;
+        font-size: 8px;
     }
 }
