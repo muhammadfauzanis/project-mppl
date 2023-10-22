@@ -34,9 +34,8 @@ function HomeMenu() {
         </div>
         <CategorySection />
         <div
-          className={`flex flex-row flex-wrap ${
-            isFixed ? `mt-24 transition duration-500 ease-in-out` : ""
-          }`}
+          className={`flex flex-row flex-wrap ${isFixed ? `mt-24 transition duration-500 ease-in-out` : ""
+            }`} style={{  display: 'flex', justifyContent: 'center' }}
         >
           <div id="kopi">
             <MenuCard />

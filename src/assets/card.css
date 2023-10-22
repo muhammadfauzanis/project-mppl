@@ -1,0 +1,42 @@
+.card-body{
+    margin: 10px;
+}
+
+@media screen and (max-width: 500px) {
+    .card {
+        width: 220px;
+    }
+}
+@media screen and (max-width: 450px) {
+    .card {
+        width: 200px;
+    }
+    .card-body{
+        margin: 10px;
+    }
+}
+@media screen and (max-width: 410px) {
+    .card {
+        width: 150px;
+    }
+    .card-body{
+        width: 140px;
+    }
+    .card-body p{
+        font-size: 10px;
+    }
+}
+@media screen and (max-width: 310px) {
+    .card {
+        width: 110px;
+    }
+    .card-body{
+        width: 100px;
+    }
+    .card-body h3{
+        font-size: 9px;
+    }
+    .card-body p{
+        font-size: 7px;
+    }
+}
