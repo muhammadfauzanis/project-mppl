@@ -9,7 +9,8 @@ export default {
     screens: {
       sm: "400px",
       md: "500px",
-      lg: "600px",
+      lg: "750px",
+      xl: "1900px",
     },
   },
   plugins: [require("tailwind-scrollbar-hide")],

@@ -3,6 +3,7 @@ import CartButton from "../Components/CartButton";
 import CategorySection from "../Components/CategorySection";
 import MenuCard from "../Components/MenuCard";
 import Navbar from "../Components/Navbar";
+import { Link } from "react-router-dom";
 
 function HomeMenu() {
   const [isFixed, setIsFixed] = useState(false);
@@ -34,8 +35,10 @@ function HomeMenu() {
         </div>
         <CategorySection />
         <div
-          className={`flex flex-row flex-wrap ${isFixed ? `mt-24 transition duration-500 ease-in-out` : ""
-            }`} style={{  display: 'flex', justifyContent: 'center' }}
+          className={`flex flex-row flex-wrap ${
+            isFixed ? `mt-24 transition duration-500 ease-in-out` : ""
+          }`}
+          style={{ display: "flex", justifyContent: "center" }}
         >
           <div id="kopi">
             <MenuCard />
@@ -54,7 +57,9 @@ function HomeMenu() {
           </div>
           <MenuCard />
         </div>
-        <CartButton variant="flex items-center justify-center fixed bottom-4 right-4 md:bottom-4 md:right-1/4 md:-translate-x-60 w-14 h-14 rounded-full bg-[#98694F] shadow-lg" />
+        <Link to="/checkout-form">
+          <CartButton inputClassname="flex items-center justify-center fixed bottom-4 right-4 sm:bottom-4 md:right-4 lg:right-1/4 lg:-translate-x-32 xl:right-1/4 xl:-translate-x-56 w-14 h-14 rounded-full bg-[#98694F] shadow-lg cursor-pointer" />
+        </Link>
       </div>
     </div>
   );
