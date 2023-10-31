@@ -34,25 +34,24 @@ function HomeMenu() {
         </div>
         <CategorySection />
         <div
-          className={`flex flex-row flex-wrap ${isFixed ? `mt-24 transition duration-500 ease-in-out` : ""
-            }`} style={{  display: 'flex', justifyContent: 'center' }}
-        >
-          <div id="kopi">
+          className={` ${isFixed ? `mt-24 transition duration-500 ease-in-out` : ""
+            }`}>
+          <div id="kopi" className="flex flex-row flex-wrap justify-center">
+            <MenuCard />
+            <MenuCard />
+            <MenuCard />
             <MenuCard />
           </div>
-          <MenuCard />
-          <MenuCard />
-          <MenuCard />
-          <div>
+          <div id="minuman" className="flex flex-row flex-wrap justify-center">
+            <MenuCard />
+            <MenuCard />
+            <MenuCard />
             <MenuCard />
           </div>
-          <MenuCard />
-          <MenuCard />
-          <MenuCard />
-          <div id="cemilan">
+          <div id="cemilan" className="flex flex-row flex-wrap justify-center">
+            <MenuCard />
             <MenuCard />
           </div>
-          <MenuCard />
         </div>
         <CartButton variant="flex items-center justify-center fixed bottom-4 right-4 md:bottom-4 md:right-1/4 md:-translate-x-60 w-14 h-14 rounded-full bg-[#98694F] shadow-lg" />
       </div>
