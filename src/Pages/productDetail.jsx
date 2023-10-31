@@ -65,10 +65,10 @@ function ProductDetail() {
             <BsCartFill size={25} className="text-white" />
           </div>
         </div>
-        <div className="flex flex-row justify-between p-4 max-w-[80%] mx-auto mt-6  bg-[#98694F] rounded-lg ">
+        <button className="flex flex-row justify-between p-4 w-[80%] mx-auto mt-6  bg-[#98694F] rounded-lg ">
           <h3 className="text-white font-semibold">Tambah Ke Keranjang</h3>
           <BsFillCartPlusFill size={30} className="text-white" />
-        </div>
+        </button>
       </div>
     </div>
   );

@@ -7,8 +7,9 @@ export default {
       asap: ["Asap Condensed", "sans"],
     },
     screens: {
-      sm: "450px",
-      md: "650px",
+      sm: "400px",
+      md: "500px",
+      lg: "600px",
     },
   },
   plugins: [require("tailwind-scrollbar-hide")],
