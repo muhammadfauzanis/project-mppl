@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
-import { BsArrowLeft } from "react-icons/bs";
-import Form from "../Components/Form";
+import { Link } from 'react-router-dom';
+import { BsArrowLeft } from 'react-icons/bs';
+import Form from '../Components/Form';
 
 function CheckoutForm() {
   return (
@@ -13,33 +13,20 @@ function CheckoutForm() {
 
       <div className="p-5 bg-slate-200">
         <h3 className="font-bold text-lg">Informasi Pembeli</h3>
-        <p className="text-md">
-          Untuk pengiriman bukti faktur pembelian dan pengiriman
-        </p>
+        <p className="text-md">Untuk pengiriman bukti faktur pembelian dan pengiriman</p>
       </div>
 
       <div className="w-full mt-3 pb-80 ">
         <Form inputId="no-hp" judul="No Hp" placeholder="Masukkan nomor hp" />
         <Form inputId="nama" judul="Nama Pemesan" placeholder="Masukkan nama" />
-        <Form
-          inputId="no-meja"
-          judul="Nomor Meja"
-          placeholder="Masukkan nomor meja"
-        />
+        <Form inputId="no-meja" judul="Nomor Meja" placeholder="Masukkan nomor meja" />
       </div>
 
       <div className="w-full md:max-w-lg fixed bottom-0 bg-slate-200 flex flex-row p-3 justify-center items-center rounded-t-md">
-        <h3 className="text-sm sm:text-md font-bold text-black ml-3">
-          Total Bayar:{" "}
-        </h3>
-        <p className="text-sm sm:text-md font-bold text-black ml-1">
-          {" "}
-          Rp.17000
-        </p>
+        <h3 className="text-sm sm:text-md font-bold text-black ml-3">Total Bayar: </h3>
+        <p className="text-sm sm:text-md font-bold text-black ml-1"> Rp.17000</p>
         <button className="p-2 sm:p-3 w-[40%] sm:w-[50%] mx-auto bg-[#98694F] rounded-lg ">
-          <h3 className="text-white text-sm sm:text-md font-semibold">
-            Pilih metode pembayaran
-          </h3>
+          <h3 className="text-white text-sm sm:text-md font-semibold">Pilih metode pembayaran</h3>
         </button>
       </div>
     </div>
