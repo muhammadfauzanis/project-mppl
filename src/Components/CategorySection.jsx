@@ -34,7 +34,7 @@ function CategorySection() {
         <Link to="minuman" smooth={true} duration={500}>
           <ListCategory imgPath="/orange-juice.png" text="Minuman" />
         </Link>
-        <Link to="cemilan">
+        <Link to="cemilan" smooth={true} duration={500}>
           <ListCategory imgPath="/french-fries.png" text="Cemilan" />
         </Link>
         <Link>

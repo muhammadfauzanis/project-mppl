@@ -4,11 +4,8 @@ import { BsFillCartPlusFill } from "react-icons/bs";
 
 function MenuCard() {
   return (
-    <div
-      className="card mt-5 w-48 sm:w-60 "
-      style={{ display: "flex", justifyContent: "center" }}
-    >
-      <div className="card-body flex flex-col bg-white p-3 ml-2 mr-2 sm:ml-5 sm:mr-5 md:ml-3 md:mr-3 rounded-2xl shadow-xl ">
+    <div className="card mt-5 sm:w-48 md:w-60 flex justify-center">
+      <div className="card-body flex flex-col bg-white p-3 ml-2 mr-2 xs:ml-7 xs:mr-7 md:ml-4 md:mr-4 rounded-2xl shadow-xl ">
         <Link to="/product-detail" className="cursor-pointer">
           <img src="/latte.png" alt="" className="w-full" />
           <h3 className="text-md sm:text-lg text-[#414141] font-bold">
