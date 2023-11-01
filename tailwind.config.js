@@ -7,7 +7,7 @@ export default {
       asap: ["Asap Condensed", "sans"],
     },
     screens: {
-      sm: "400px",
+      sm: "390px",
       md: "500px",
       lg: "750px",
       xl: "1900px",
