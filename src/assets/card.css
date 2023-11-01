@@ -47,6 +47,12 @@
 @media screen and (max-width: 450px) {
     .card-button-container {
         right: 0;
+        transform: translate(-220px,0);
+    }
+}
+@media screen and (max-width: 399px) {
+    .card-button-container {
+        right: 0;
         transform: translate(-156px,0);
     }
 }
