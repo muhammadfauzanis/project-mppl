@@ -18,7 +18,7 @@ function CategorySection() {
 
   return (
     <div className="px-7 mt-5">
-      <h3 className="text-md sm:text-lg font-bold text-[#414141]">Kategori</h3>
+      {/* <h3 className="text-md sm:text-lg font-bold text-[#414141]">Kategori</h3> */}
       <div
         // state isFixed dipake di sini
         className={`flex gap-5 py-3 transition duration-300 md:transition-none overflow-x-auto scroll-smooth scrollbar-hide ${
@@ -28,16 +28,16 @@ function CategorySection() {
         }`}
         style={{ zIndex: 100 }}
       >
-        <Link to="kopi" smooth={true} duration={500}>
+        <Link to="Kopi" smooth={true} duration={500}>
           <ListCategory imgPath="/coffe.png" text="Kopi" />
         </Link>
-        <Link to="minuman" smooth={true} duration={500}>
+        <Link to="Minuman" smooth={true} duration={500}>
           <ListCategory imgPath="/orange-juice.png" text="Minuman" />
         </Link>
         <Link to="cemilan" smooth={true} duration={500}>
           <ListCategory imgPath="/french-fries.png" text="Cemilan" />
         </Link>
-        <Link to="">
+        <Link to="Makanan">
           <ListCategory imgPath="/bibimbap.png" text="Makanan" />
         </Link>
         <Link to="">

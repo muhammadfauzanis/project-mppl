@@ -1,10 +1,15 @@
 import { BsArrowLeft, BsCartFill, BsFillCartPlusFill } from "react-icons/bs";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ProductDetail() {
-  const [count, setCount] = useState(0); // default value nya 0
+  const [count, setCount] = useState(0);
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const reserve = params.get("reserve");
 
   // handle button tambah
   const increment = () => {
@@ -17,14 +22,29 @@ function ProductDetail() {
       setCount(count - 1);
     }
   };
+
+  // TOAST SUKSES
+  const showToastSuccess = (msg) => {
+    toast.success(msg, {
+      position: "top-center",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  }
   return (
     <div>
+      <ToastContainer />
       <div className="bg-slate-200 mx-auto my-0 max-w-lg h-full pb-8">
         <div className="flex justify-between items-center  bg-[#98694F] px-7 py-5">
           <Link to="/">
             <BsArrowLeft size={30} className="z-50 text-white" />
           </Link>
-          <Link to="/checkout-form">
+          <Link to={`/checkout-form?reserve=${reserve == null ? (false) : (reserve)}`}>
             <BsCartFill size={25} className="text-white" />
           </Link>
         </div>
@@ -63,7 +83,7 @@ function ProductDetail() {
             dengan tekstur yang halus dan krim.
           </p>
         </div>
-        <button className="flex flex-row justify-between p-4 w-[80%] mx-auto mt-6  bg-[#98694F] rounded-lg ">
+        <button onClick={() => {showToastSuccess("Hidangan ditambahkan")}} className="flex flex-row justify-between p-4 w-[80%] mx-auto mt-6  bg-[#98694F] rounded-lg ">
           <h3 className="text-white font-semibold">Tambah Ke Keranjang</h3>
           <BsFillCartPlusFill size={30} className="text-white" />
         </button>
