@@ -9,21 +9,10 @@ import PlusMinusButton from '../Components/PlusMinusButton';
 import { BsFillCartPlusFill } from 'react-icons/bs';
 
 function HomeMenu() {
-  const [isFixed, setIsFixed] = useState(false);
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const reserve = params.get('reserve');
   const [isLoading, setIsLoading] = useState(true);
-
-  // buat handle card menu pas ngescroll jdi geser kebawah dikit
-  const handleScroll = () => {
-    if (window.scrollY > 230) {
-      setIsFixed(true);
-    } else {
-      setIsFixed(false);
-    }
-  };
-  window.addEventListener('scroll', handleScroll);
 
   // GET PRODUCTS KOPI
   const [allProducts, setAllProducts] = useState([]);
