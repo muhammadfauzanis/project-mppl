@@ -13,6 +13,7 @@ function HomeMenu() {
   const params = new URLSearchParams(location.search);
   const reserve = params.get("reserve");
   const [isLoading, setIsLoading] = useState(true);
+  const [isFixed, setIsFixed] = useState(false);
 
   // GET PRODUCTS KOPI
   const [allProducts, setAllProducts] = useState([]);
@@ -47,9 +48,24 @@ function HomeMenu() {
 
     return formatter.format(amount);
   };
+
+  const handleScroll = () => {
+    if (window.scrollY > 225) {
+      setIsFixed(true);
+    } else {
+      setIsFixed(false);
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+
   return (
     <div>
-      <div className="bg-slate-200 mx-auto my-0 max-w-lg h-full">
+      <div
+        className={`bg-[#ededed] mx-auto my-0 max-w-lg h-full ${
+          isFixed ? "pb-64" : ""
+        }`}
+      >
         <Navbar />
 
         {/* SELAMAT DATANG */}
@@ -212,16 +228,21 @@ function HomeMenu() {
               <div
                 id={items.nama_kategori_menu.toLowerCase().replace(" ", "-")}
               >
-                <div className="flex flex-row flex-wrap justify-center w-full mt-5">
+                <div
+                  className={`flex flex-row flex-wrap justify-center w-full mt-5 ${
+                    isFixed
+                      ? "translate-y-28 md:translate-y-40 lg:translate-y-48 transition-transform duration-1000"
+                      : "translate-y-0 transition-transform duration-1000"
+                  }`}
+                >
                   <h1
-                    className="ms-8 w-full font-bold"
+                    className="w-full font-bold ms-10"
                     style={{ marginBottom: "-30px" }}
                   >
                     {items.nama_kategori_menu}
                   </h1>
                   {items.menu.map((menu) => {
                     return (
-                      // eslint-disable-next-line react/jsx-key
                       <div className="card mt-5 sm:w-48 md:w-60 flex justify-center">
                         <div className="card-body flex flex-col justify-between bg-white p-3 ml-2 mr-2 xs:ml-7 xs:mr-7 md:ml-4 md:mr-4 rounded-2xl shadow-xl ">
                           <div className="">
