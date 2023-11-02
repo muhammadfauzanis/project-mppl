@@ -28,16 +28,16 @@ function CategorySection() {
         }`}
         style={{ zIndex: 100 }}
       >
-        <Link to="Kopi" smooth={true} duration={500}>
+        <Link to="Kopi" smooth={true} duration={500} offset={-80}>
           <ListCategory imgPath="/coffe.png" text="Kopi" />
         </Link>
-        <Link to="Minuman" smooth={true} duration={500}>
+        <Link to="Minuman" smooth={true} duration={500} offset={-30}>
           <ListCategory imgPath="/orange-juice.png" text="Minuman" />
         </Link>
         <Link to="cemilan" smooth={true} duration={500}>
           <ListCategory imgPath="/french-fries.png" text="Cemilan" />
         </Link>
-        <Link to="Makanan">
+        <Link to="Makanan" smooth={true} duration={500} offset={-30}>
           <ListCategory imgPath="/bibimbap.png" text="Makanan" />
         </Link>
         <Link to="">
@@ -47,6 +47,11 @@ function CategorySection() {
           <ListCategory imgPath="/bibimbap.png" text="Makanan" />
         </Link>
       </div>
+      <div
+        // state isFixed dipake di sini
+        className={`${isFixed ? "" : "hidden"}`}
+        style={{ height: 100 }}
+      ></div>
     </div>
   );
 }
