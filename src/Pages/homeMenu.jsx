@@ -91,7 +91,7 @@ function HomeMenu() {
         ) : (
           allProducts.map((items) => {
             return (
-              <div id={items.nama_kategori_menu}>
+              <div id={items.nama_kategori_menu.toLowerCase().replace(" ","-")}>
                 <div className="flex flex-row flex-wrap justify-center w-full mt-5">
                   <h1 className="ms-8 w-full font-bold" style={{ marginBottom: '-30px' }}>
                     {items.nama_kategori_menu}
