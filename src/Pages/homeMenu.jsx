@@ -40,7 +40,8 @@ function HomeMenu() {
           }`}
           style={{ display: "flex", justifyContent: "center" }}
         >
-          <div id="kopi">
+          <div id="kopi" className="flex flex-row flex-wrap justify-center">
+            <MenuCard />
             <MenuCard />
           </div>
           <div id="minuman" className="flex flex-row flex-wrap justify-center">

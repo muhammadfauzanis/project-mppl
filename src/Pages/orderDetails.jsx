@@ -1,4 +1,5 @@
-import { BsArrowLeft } from 'react-icons/bs';
+import { BsArrowLeft } from "react-icons/bs";
+// import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 
 function OrderDetails() {
   return (
@@ -64,11 +65,34 @@ function OrderDetails() {
         </div>
       </div>
       <div className="w-full md:max-w-lg sm:fixed bottom-0 flex p-3 justify-center items-center gap-x-4 rounded-t-md mb-[29px] bg-white py-3 sm:py-0">
-        <button className=" border-2 border-[#98694F] px-[20px] py-[10px] md:px-[42px] md:py-[14px] rounded-md text-[#98694F]">Bayar Nanti</button>
-        <button className="bg-[#98694F] px-[20px] py-[10px] md:px-[42px] md:py-[14px] rounded-md text-white ">Bayar Sekarang</button>
+        <button className=" border-2 border-[#98694F] px-[20px] py-[10px] md:px-[42px] md:py-[14px] rounded-md text-[#98694F]">
+          Bayar Nanti
+        </button>
+        <button className="bg-[#98694F] px-[20px] py-[10px] md:px-[42px] md:py-[14px] rounded-md text-white ">
+          Bayar Sekarang
+        </button>
       </div>
     </div>
   );
 }
 
 export default OrderDetails;
+
+// import { useState, useEffect } from "react";
+// function OrderDetails() {
+//   const [userDevice, setUserDevice] = useState("");
+
+//   useEffect(() => {
+//     const userAgent = navigator.userAgent;
+//     setUserDevice(userAgent);
+//   }, []);
+
+//   return (
+//     <div>
+//       <h2>Informasi Perangkat Pengguna</h2>
+//       <p>Nama Perangkat: {userDevice}</p>
+//     </div>
+//   );
+// }
+
+// export default OrderDetails;
