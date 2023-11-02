@@ -21,12 +21,12 @@ function CategorySection() {
       {/* <h3 className="text-md sm:text-lg font-bold text-[#414141]">Kategori</h3> */}
       <div
         // state isFixed dipake di sini
-        className={` w-full ${
+        className={` ${
           isFixed
             ? "fixed top-0 left-0 md:top-0 md:left-1/2 md:-translate-x-1/2 bg-white px-7 transition duration-500 md:transition-none"
             : ""
         }`}
-        style={{ zIndex: 100 }}
+        style={{ zIndex: 100, width:'100%', maxWidth: '512px' }}
       >
         <div className="flex gap-5 py-3 transition duration-300 md:transition-none overflow-x-auto scroll-smooth scrollbar-hide">
         <Link to="Kopi" smooth={true} duration={500} offset={-80}>
