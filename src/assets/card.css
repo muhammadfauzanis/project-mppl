@@ -35,18 +35,6 @@
 @media screen and (max-width: 450px) {
     .card-button-container {
         right: 0;
-        transform: translate(-156px,0);
-    }
-}
-
-.card-button-container{
-    top: 0;
-    transform: translate(-50%,0);
-    right: 50%;
-}
-@media screen and (max-width: 450px) {
-    .card-button-container {
-        right: 0;
         transform: translate(-220px,0);
     }
 }
