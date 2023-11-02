@@ -29,16 +29,16 @@ function CategorySection() {
         style={{ zIndex: 100, width:'100%', maxWidth: '512px' }}
       >
         <div className="flex gap-5 py-3 transition duration-300 md:transition-none overflow-x-auto scroll-smooth scrollbar-hide">
-        <Link to="Kopi" smooth={true} duration={500} offset={-80}>
+        <Link to="kopi" smooth={true} duration={500} offset={-80}>
           <ListCategory imgPath="/coffe.png" text="Kopi" />
         </Link>
-        <Link to="Minuman" smooth={true} duration={500} offset={-30}>
+        <Link to="minuman" smooth={true} duration={500} offset={-30}>
           <ListCategory imgPath="/orange-juice.png" text="Minuman" />
         </Link>
         <Link to="cemilan" smooth={true} duration={500}>
           <ListCategory imgPath="/french-fries.png" text="Cemilan" />
         </Link>
-        <Link to="Makanan" smooth={true} duration={500} offset={-30}>
+        <Link to="makanan" smooth={true} duration={500} offset={-30}>
           <ListCategory imgPath="/bibimbap.png" text="Makanan" />
         </Link>
         <Link to="">

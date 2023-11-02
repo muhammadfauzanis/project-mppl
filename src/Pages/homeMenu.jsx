@@ -33,7 +33,7 @@ function HomeMenu() {
     fetchDataCoffee();
   }, []);
 
-  console.log(allProducts);
+  // console.log(allProducts);
 
   //FORMAT RUPIAH
   const formatRupiah = (amount) => {
