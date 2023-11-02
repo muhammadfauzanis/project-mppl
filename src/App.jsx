@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomeMenu from './Pages/HomeMenu';
 import ProductDetail from './Pages/productDetail';
 import CheckoutForm from './Pages/checkoutForm';
 import OrderDetails from './Pages/orderDetails';
+import HomeMenu from './Pages/homeMenu';
 
 function App() {
   return (

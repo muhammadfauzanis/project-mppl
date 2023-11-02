@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { useLocation } from "react-router-dom";
 
 Form.propTypes = {
   inputId: PropTypes.string.isRequired,
@@ -6,7 +7,8 @@ Form.propTypes = {
   placeholder: PropTypes.string.isRequired,
 };
 
-function Form({ inputId, judul, placeholder }) {
+function Form({ inputId, judul, placeholder, value }) {
+  
   return (
     <form action="" className="flex flex-col py-3 mx-auto w-[90%] bg-white">
       <label htmlFor={inputId} className="font-bold">
@@ -15,6 +17,7 @@ function Form({ inputId, judul, placeholder }) {
       <input
         type="text"
         id={inputId}
+        value={value}
         placeholder={placeholder}
         className="border-2 border-[#98694F] p-4 rounded-lg"
       />

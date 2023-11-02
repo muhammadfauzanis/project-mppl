@@ -18,26 +18,27 @@ function CategorySection() {
 
   return (
     <div className="px-7 mt-5">
-      <h3 className="text-md sm:text-lg font-bold text-[#414141]">Kategori</h3>
+      {/* <h3 className="text-md sm:text-lg font-bold text-[#414141]">Kategori</h3> */}
       <div
         // state isFixed dipake di sini
-        className={`flex gap-5 py-3 transition duration-300 md:transition-none overflow-x-auto scroll-smooth scrollbar-hide ${
+        className={` ${
           isFixed
             ? "fixed top-0 left-0 md:top-0 md:left-1/2 md:-translate-x-1/2 bg-white px-7 transition duration-500 md:transition-none"
             : ""
         }`}
-        style={{ zIndex: 100 }}
+        style={{ zIndex: 100, width:'100%', maxWidth: '512px' }}
       >
-        <Link to="kopi" smooth={true} duration={500}>
+        <div className="flex gap-5 py-3 transition duration-300 md:transition-none overflow-x-auto scroll-smooth scrollbar-hide">
+        <Link to="kopi" smooth={true} duration={500} offset={-80}>
           <ListCategory imgPath="/coffe.png" text="Kopi" />
         </Link>
-        <Link to="minuman" smooth={true} duration={500}>
+        <Link to="minuman" smooth={true} duration={500} offset={-30}>
           <ListCategory imgPath="/orange-juice.png" text="Minuman" />
         </Link>
         <Link to="cemilan" smooth={true} duration={500}>
           <ListCategory imgPath="/french-fries.png" text="Cemilan" />
         </Link>
-        <Link to="">
+        <Link to="makanan" smooth={true} duration={500} offset={-30}>
           <ListCategory imgPath="/bibimbap.png" text="Makanan" />
         </Link>
         <Link to="">
@@ -46,7 +47,13 @@ function CategorySection() {
         <Link to="">
           <ListCategory imgPath="/bibimbap.png" text="Makanan" />
         </Link>
+        </div>
       </div>
+      <div
+        // state isFixed dipake di sini
+        className={`${isFixed ? "" : "hidden"}`}
+        style={{ height: 100 }}
+      ></div>
     </div>
   );
 }

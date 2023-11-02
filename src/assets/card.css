@@ -2,6 +2,12 @@
     margin: 10px;
 }
 
+.card-body img{
+    aspect-ratio: 3/2;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
 @media screen and (max-width: 500px) {
     .card {
         width: 220px;
@@ -24,18 +30,6 @@
     }
     .card-body p{
         font-size: 8px;
-    }
-}
-
-.card-button-container{
-    top: 0;
-    transform: translate(-50%,0);
-    right: 50%;
-}
-@media screen and (max-width: 450px) {
-    .card-button-container {
-        right: 0;
-        transform: translate(-156px,0);
     }
 }
 
