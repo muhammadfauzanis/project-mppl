@@ -14,7 +14,7 @@ function CheckoutForm() {
         </Link>
       </div>
 
-      <div className="p-5 bg-slate-200">
+      <div className="p-5 bg-warnaBg ">
         <h3 className="font-bold text-lg">Informasi Pembeli</h3>
         <p className="text-md">
           Untuk pengiriman bukti faktur pembelian dan pengiriman
@@ -32,7 +32,7 @@ function CheckoutForm() {
         />
       </div>
 
-      <div className="w-full md:max-w-lg fixed bottom-0 bg-slate-200 flex flex-row p-3 justify-center items-center rounded-t-md">
+      <div className="w-full md:max-w-lg fixed bottom-0 bg-warnaBg flex flex-row p-3 justify-center items-center rounded-t-md">
         <h3 className="text-sm sm:text-md font-bold text-black ml-3">
           Total Bayar:{" "}
         </h3>

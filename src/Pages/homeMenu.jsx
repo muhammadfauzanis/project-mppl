@@ -62,7 +62,7 @@ function HomeMenu() {
   return (
     <div>
       <div
-        className={`bg-[#ededed] mx-auto my-0 max-w-lg h-full ${
+        className={`bg-warnaBg mx-auto my-0 max-w-lg h-full ${
           isFixed ? "pb-64" : ""
         }`}
       >

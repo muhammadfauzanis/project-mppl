@@ -3,7 +3,7 @@ import { BsArrowLeft } from "react-icons/bs";
 
 function OrderDetails() {
   return (
-    <div className="h-full bg-white max-w-lg mx-auto bg-slate-200">
+    <div className="h-full max-w-lg mx-auto bg-warnaBg">
       <div className="flex items-center  p-3 bg-[#98694F] text-white">
         <BsArrowLeft size={30} />
 
@@ -35,7 +35,7 @@ function OrderDetails() {
 
       <h3 className="px-5 py-5 font-bold text-lg">Rincian Pesanan</h3>
 
-      <div className="bg-white rounded-sm">
+      <div className="bg-white rounded-sm ">
         <div className="flex justify-between items-center px-5 py-5 border-b-2 border-neutral-400 ">
           <div className=" flex gap-x-7">
             <p>Cafe Latte</p>
@@ -57,14 +57,14 @@ function OrderDetails() {
           </div>
           <p>Rp.17.000</p>
         </div>
-        <div className="flex justify-between items-center px-5 py-5  ">
+        <div className="flex justify-between items-center px-5 py-5 pb-5">
           <div className=" flex gap-x-7">
             <p className="font-bold">Total</p>
           </div>
           <p className="font-bold">Rp.17.000</p>
         </div>
       </div>
-      <div className="w-full md:max-w-lg sm:fixed bottom-0 flex p-3 justify-center items-center gap-x-4 rounded-t-md mb-[29px] bg-white py-3 sm:py-0">
+      <div className="w-full md:max-w-lg fixed  bottom-0 flex p-3 justify-center items-center gap-x-4 rounded-t-md mb-[29px] bg-white py-3 sm:py-0">
         <button className=" border-2 border-[#98694F] px-[20px] py-[10px] md:px-[42px] md:py-[14px] rounded-md text-[#98694F]">
           Bayar Nanti
         </button>

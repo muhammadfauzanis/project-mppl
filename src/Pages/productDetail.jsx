@@ -2,8 +2,8 @@ import { BsArrowLeft, BsCartFill, BsFillCartPlusFill } from "react-icons/bs";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ProductDetail() {
   const [count, setCount] = useState(0);
@@ -35,16 +35,18 @@ function ProductDetail() {
       progress: undefined,
       theme: "light",
     });
-  }
+  };
   return (
     <div>
       <ToastContainer />
-      <div className="bg-slate-200 mx-auto my-0 max-w-lg h-full pb-8">
+      <div className="bg-warnaBg mx-auto my-0 max-w-lg h-full pb-8">
         <div className="flex justify-between items-center  bg-[#98694F] px-7 py-5">
           <Link to="/">
             <BsArrowLeft size={30} className="z-50 text-white" />
           </Link>
-          <Link to={`/checkout-form?reserve=${reserve == null ? (false) : (reserve)}`}>
+          <Link
+            to={`/checkout-form?reserve=${reserve == null ? false : reserve}`}
+          >
             <BsCartFill size={25} className="text-white" />
           </Link>
         </div>
@@ -83,7 +85,12 @@ function ProductDetail() {
             dengan tekstur yang halus dan krim.
           </p>
         </div>
-        <button onClick={() => {showToastSuccess("Hidangan ditambahkan")}} className="flex flex-row justify-between p-4 w-[80%] mx-auto mt-6  bg-[#98694F] rounded-lg ">
+        <button
+          onClick={() => {
+            showToastSuccess("Hidangan ditambahkan");
+          }}
+          className="flex flex-row justify-between p-4 w-[80%] mx-auto mt-6  bg-[#98694F] rounded-lg "
+        >
           <h3 className="text-white font-semibold">Tambah Ke Keranjang</h3>
           <BsFillCartPlusFill size={30} className="text-white" />
         </button>
