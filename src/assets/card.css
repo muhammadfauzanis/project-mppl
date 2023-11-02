@@ -2,6 +2,12 @@
     margin: 10px;
 }
 
+.card-body img{
+    aspect-ratio: 3/2;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
 @media screen and (max-width: 500px) {
     .card {
         width: 220px;
