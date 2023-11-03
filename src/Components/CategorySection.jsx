@@ -43,7 +43,7 @@ function CategorySection() {
           <div className="flex gap-5 py-3 transition duration-300  overflow-x-auto scroll-smooth scrollbar-hide">
             {allProducts.map((items,key) => {
               return (
-                <Link to={items.nama_kategori_menu.toLowerCase().replace(" ", "-")} smooth={true} duration={500} offset={key === 0 ? -80 : 50}>
+                <Link key={items.id_kategori_menu} to={items.nama_kategori_menu.toLowerCase().replace(" ", "-")} smooth={true} duration={500} offset={key === 0 ? -80 : 50}>
                   <ListCategory imgPath="/coffe.png" text={items.nama_kategori_menu} />
                 </Link>
               )

@@ -66,6 +66,7 @@ function HomeMenu() {
           allProducts.map((items) => {
             return (
               <div
+                key={items.id_kategori_menu}
                 id={items.nama_kategori_menu.toLowerCase().replace(" ", "-")}
               >
                 <div
@@ -83,7 +84,7 @@ function HomeMenu() {
                   </h1>
                   {items.menu.map((menu) => {
                     return (
-                      <div className="card mt-5 sm:w-48 md:w-60 flex justify-center">
+                      <div key={menu.id_menu} className="card mt-5 sm:w-48 md:w-60 flex justify-center">
                         <div className="card-body flex flex-col justify-between bg-white p-3 ml-2 mr-2 xs:ml-7 xs:mr-7 md:ml-4 md:mr-4 rounded-2xl shadow-xl ">
                           <Link
                             to={`/product-detail?menu=${menu.id_menu}&reserve=${

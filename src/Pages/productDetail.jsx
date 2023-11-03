@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import PlusMinusButton from "../Components/PlusMinusButton";
 import axios from "axios";
 import { Helper } from "../Helper/Helper";
+import { Cart } from "../Helper/Cart";
 import Loading from "../Components/Loading";
 
 function ProductDetail() {
@@ -16,6 +17,7 @@ function ProductDetail() {
   const id_menu = params.get("menu");
   const [isLoading, setIsLoading] = useState(true);
   const { formatRupiah , baseURLAPI} = Helper();
+  const { addCart, listCart } = Cart();
 
   // GET PRODUCTS
   const [product, setProduct] = useState([]);
@@ -99,6 +101,8 @@ function ProductDetail() {
               <button
                 onClick={() => {
                   showToastSuccess("Hidangan ditambahkan");
+                  addCart(id_menu,10);
+                  listCart();
                 }}
                 className="flex flex-row justify-between p-4 w-[80%] mx-auto mt-6  bg-[#98694F] rounded-lg "
               >
