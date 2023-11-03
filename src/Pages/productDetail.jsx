@@ -17,7 +17,7 @@ function ProductDetail() {
   const id_menu = params.get("menu");
   const [isLoading, setIsLoading] = useState(true);
   const { formatRupiah , baseURLAPI} = Helper();
-  const { addCart, listCart } = Cart();
+  const { addCart, getQty } = Cart();
 
   // GET PRODUCTS
   const [product, setProduct] = useState([]);
@@ -81,7 +81,7 @@ function ProductDetail() {
               />
               <div className="relative  mb-14">
                 <div className="absolute inset-x-0 top-[-20px] flex items-center justify-center">
-                  <PlusMinusButton variant="detailMenu" />
+                  <PlusMinusButton variant="detailMenu" countStart={getQty(id_menu)} />
                 </div>
               </div>
 
@@ -100,9 +100,10 @@ function ProductDetail() {
               </div>
               <button
                 onClick={() => {
+                  let qtyEl   = document.querySelectorAll(".qty-count")[0];
+                  let qty     = parseInt(qtyEl.innerText);
+                  addCart(id_menu,qty);
                   showToastSuccess("Hidangan ditambahkan");
-                  addCart(id_menu,10);
-                  console.log(listCart());
                 }}
                 className="flex flex-row justify-between p-4 w-[80%] mx-auto mt-6  bg-[#98694F] rounded-lg "
               >

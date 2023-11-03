@@ -9,6 +9,7 @@ import PlusMinusButton from "../Components/PlusMinusButton";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import Loading from "../Components/Loading";
 import { Helper } from "../Helper/Helper";
+import { Cart } from "../Helper/Cart";
 
 function HomeMenu() {
   const {formatRupiah,baseURLAPI,descriptionShort,isFixed} = Helper();
@@ -16,6 +17,7 @@ function HomeMenu() {
   const params = new URLSearchParams(location.search);
   const reserve = params.get("reserve");
   const [isLoading, setIsLoading] = useState(true);
+  const {getQty,addCart}  = Cart();
 
   // GET PRODUCTS KOPI
   const [allProducts, setAllProducts] = useState([]);
@@ -31,6 +33,14 @@ function HomeMenu() {
       console.error(error);
     }
   };
+
+  const addCartHandler = (event,id_menu) => {
+    let parent  = event.target.closest('div');
+    let qtyEl   = parent.querySelectorAll(".qty-count")[0];
+    let qty     = parseInt(qtyEl.innerText);
+    addCart(id_menu,qty);
+  }
+
   useEffect(() => {
     fetchDataCoffee();
   }, []);
@@ -110,11 +120,13 @@ function HomeMenu() {
                             <p className="text-xs sm:text-md text-[#98694F] font-bold pr-1 sm:pr-0">
                               {formatRupiah(menu.harga_menu)}
                             </p>
-                            <PlusMinusButton />
-                            <BsFillCartPlusFill
-                              size={20}
-                              className=" text-[#98694F] my-auto pl-1 sm:pl-0"
-                            />
+                            <PlusMinusButton countStart={getQty(menu.id_menu)} />
+                            <button onClick={event => addCartHandler(event,menu.id_menu)}>
+                              <BsFillCartPlusFill
+                                size={20}
+                                className=" text-[#98694F] my-auto pl-1 sm:pl-0"
+                              />
+                            </button>
                           </div>
                         </div>
                       </div>

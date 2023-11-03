@@ -37,7 +37,7 @@ function PlusMinusButton(props) {
       <button onClick={decrement} className="text-[#000000]">
         <AiOutlineMinus className={sizeButton} />
       </button>
-      <span className={`${sizeButton} text-[#98694F]`}>{count}</span>
+      <span className={`${sizeButton} text-[#98694F] qty-count`}>{count}</span>
 
       <button onClick={increment} className="text-[#000000]">
         <AiOutlinePlus className={sizeButton} />

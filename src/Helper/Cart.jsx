@@ -1,21 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const Cart = () => {
-
     const [cart,setCart]    = useState([]);
+
+    const setToCart = () => {
+        const ls    = JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")) : [];
+        setCart(ls);
+    }
+
+    useEffect(() => {
+        setToCart();
+    })
 
     const addCart = (id_menu, qty) => {
         id_menu     = parseInt(id_menu);
         
         let index    = cart.indexOf(getCart(id_menu));
+        if(qty < 1){
+            return removeCart(id_menu);
+        }
         if(index < 0){
             cart.push({
                 id_menu     : id_menu,
                 qty         : qty
             })
         }else{
-            cart[0].qty     = qty
+            cart[index].qty     = qty
         }
+
+        setCart(cart);
+        localStorage.setItem("cart", JSON.stringify(cart));
     }
 
     const removeCart = (id_menu) => {
@@ -24,6 +38,13 @@ export const Cart = () => {
         if(index >= 0){
             cart.splice(index, 1);
         }
+        setCart(cart);
+        localStorage.setItem("cart", JSON.stringify(cart));
+    }
+
+    const resetCart = () => {
+        setCart([]);
+        localStorage.setItem("cart", JSON.stringify(cart));
     }
 
     const listCart = () => {
@@ -33,10 +54,28 @@ export const Cart = () => {
         return cart.length;
     }
 
+    const countQty = () => {
+        let count   = 0;
+        listCart().map((item) => {
+            count += parseInt(item.qty)
+        })
+
+        return count;
+    }
+
     const getCart = (id_menu) => {
         id_menu     = parseInt(id_menu);
         let obj = cart.find(o => parseInt(o.id_menu) === id_menu);
         return obj;
+    }
+
+    const getQty    = (id_menu) => {
+        let obj     = getCart(id_menu);
+        if(obj != undefined){
+            return obj.qty;
+        }else{
+            return 0;
+        }
     }
     
     return {
@@ -44,6 +83,9 @@ export const Cart = () => {
         removeCart,
         listCart,
         countCart,
-        getCart
+        getCart,
+        resetCart,
+        getQty,
+        countQty
     }
 };
