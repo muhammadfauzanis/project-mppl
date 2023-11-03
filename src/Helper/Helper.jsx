@@ -1,18 +1,5 @@
-import { useState } from "react";
 
 export const Helper = () => {
-
-    const [isFixed, setIsFixed] = useState(false);
-
-    const handleScroll = () => {
-        if (window.scrollY > 225) {
-            setIsFixed(true);
-        } else {
-            setIsFixed(false);
-        }
-    };
-
-    window.addEventListener("scroll", handleScroll);
 
     const formatRupiah = (amount) => {
         const formatter = new Intl.NumberFormat("id-ID", {
@@ -22,9 +9,16 @@ export const Helper = () => {
         });
         return formatter.format(amount);
     };
+
+    const baseURLAPI = (url = '') => {
+        url     = url.replace(/^[/]/g,'');
+        // const baseURL   = 'http://127.0.0.1:8000/api/';
+        const baseURL   = 'https://jaba-coffee.000webhostapp.com/api/';
+        return baseURL + url;
+    }
     
     return {
-        isFixed,
-        formatRupiah
+        formatRupiah,
+        baseURLAPI
     }
 };

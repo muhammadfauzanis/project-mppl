@@ -11,18 +11,6 @@ function ProductDetail() {
   const params = new URLSearchParams(location.search);
   const reserve = params.get("reserve");
 
-  // handle button tambah
-  const increment = () => {
-    setCount(count + 1);
-  };
-
-  // handle button kurang
-  const decrement = () => {
-    if (count > 0) {
-      setCount(count - 1);
-    }
-  };
-
   // TOAST SUKSES
   const showToastSuccess = (msg) => {
     toast.success(msg, {

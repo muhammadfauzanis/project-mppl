@@ -11,20 +11,18 @@ import Loading from "../Components/Loading";
 import { Helper } from "../Helper/Helper";
 
 function HomeMenu() {
-  const { formatRupiah, isFixed } = Helper();
+  const { formatRupiah , baseURLAPI} = Helper();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const reserve = params.get("reserve");
   const [isLoading, setIsLoading] = useState(true);
+  const [isFixed, setIsFixed] = useState(false);
 
   // GET PRODUCTS KOPI
   const [allProducts, setAllProducts] = useState([]);
   const fetchDataCoffee = async () => {
     try {
-      // const response = await axios.get('http://127.0.0.1:8000/api/all-product');
-      const response = await axios.get(
-        "https://jaba-coffee.000webhostapp.com/api/all-product"
-      );
+      const response = await axios.get(baseURLAPI("all-product"));
       setAllProducts(response.data);
 
       setTimeout(() => {
@@ -37,6 +35,17 @@ function HomeMenu() {
   useEffect(() => {
     fetchDataCoffee();
   }, []);
+
+
+  const handleScroll = () => {
+    if (window.scrollY > 225) {
+      setIsFixed(true);
+    } else {
+      setIsFixed(false);
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
 
   return (
     <div>
