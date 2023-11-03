@@ -1,9 +1,9 @@
 import { BsArrowLeft, BsCartFill, BsFillCartPlusFill } from "react-icons/bs";
-import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PlusMinusButton from "../Components/PlusMinusButton";
 
 function ProductDetail() {
   const [count, setCount] = useState(0);
@@ -51,21 +51,12 @@ function ProductDetail() {
           </Link>
         </div>
         <img
-          src="/latte2.png
-        "
+          src="/latte2.png"
           alt=""
           className="w-full"
         />
         <div className="absolute inset-x-0 top-[330px] sm:top-[360px] md:top-[450px] flex items-center justify-center">
-          <div className="flex justify-between bg-white w-[150px] sm:w-[180px] md:w-[210px] px-3 py-2 rounded-2xl ">
-            <button onClick={decrement} className="text-[#000000]">
-              <AiOutlineMinus className="text-xl sm:text-2xl" />
-            </button>
-            <span className="text-xl sm:text-2xl text-[#000000]">{count}</span>
-            <button onClick={increment} className="text-[#000000]">
-              <AiOutlinePlus className="text-xl sm:text-2xl" />
-            </button>
-          </div>
+          <PlusMinusButton variant="detailMenu" />
         </div>
 
         <div className="max-w-[80%] bg-white mx-auto pb-[115px]">

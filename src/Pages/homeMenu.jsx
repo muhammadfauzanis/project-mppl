@@ -7,6 +7,7 @@ import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 import PlusMinusButton from "../Components/PlusMinusButton";
 import { BsFillCartPlusFill } from "react-icons/bs";
+import Loading from "../Components/Loading";
 
 function HomeMenu() {
   const location = useLocation();
@@ -83,145 +84,7 @@ function HomeMenu() {
 
         {/* SEMUA PRODUK */}
         {isLoading ? (
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="40"
-              height="40"
-              viewBox="0 0 24 24"
-            >
-              <circle cx="12" cy="2" r="0" fill="currentColor">
-                <animate
-                  attributeName="r"
-                  begin="0"
-                  calcMode="spline"
-                  dur="1s"
-                  keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
-                  repeatCount="indefinite"
-                  values="0;2;0;0"
-                />
-              </circle>
-              <circle
-                cx="12"
-                cy="2"
-                r="0"
-                fill="currentColor"
-                transform="rotate(45 12 12)"
-              >
-                <animate
-                  attributeName="r"
-                  begin="0.125s"
-                  calcMode="spline"
-                  dur="1s"
-                  keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
-                  repeatCount="indefinite"
-                  values="0;2;0;0"
-                />
-              </circle>
-              <circle
-                cx="12"
-                cy="2"
-                r="0"
-                fill="currentColor"
-                transform="rotate(90 12 12)"
-              >
-                <animate
-                  attributeName="r"
-                  begin="0.25s"
-                  calcMode="spline"
-                  dur="1s"
-                  keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
-                  repeatCount="indefinite"
-                  values="0;2;0;0"
-                />
-              </circle>
-              <circle
-                cx="12"
-                cy="2"
-                r="0"
-                fill="currentColor"
-                transform="rotate(135 12 12)"
-              >
-                <animate
-                  attributeName="r"
-                  begin="0.375s"
-                  calcMode="spline"
-                  dur="1s"
-                  keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
-                  repeatCount="indefinite"
-                  values="0;2;0;0"
-                />
-              </circle>
-              <circle
-                cx="12"
-                cy="2"
-                r="0"
-                fill="currentColor"
-                transform="rotate(180 12 12)"
-              >
-                <animate
-                  attributeName="r"
-                  begin="0.5s"
-                  calcMode="spline"
-                  dur="1s"
-                  keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
-                  repeatCount="indefinite"
-                  values="0;2;0;0"
-                />
-              </circle>
-              <circle
-                cx="12"
-                cy="2"
-                r="0"
-                fill="currentColor"
-                transform="rotate(225 12 12)"
-              >
-                <animate
-                  attributeName="r"
-                  begin="0.625s"
-                  calcMode="spline"
-                  dur="1s"
-                  keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
-                  repeatCount="indefinite"
-                  values="0;2;0;0"
-                />
-              </circle>
-              <circle
-                cx="12"
-                cy="2"
-                r="0"
-                fill="currentColor"
-                transform="rotate(270 12 12)"
-              >
-                <animate
-                  attributeName="r"
-                  begin="0.75s"
-                  calcMode="spline"
-                  dur="1s"
-                  keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
-                  repeatCount="indefinite"
-                  values="0;2;0;0"
-                />
-              </circle>
-              <circle
-                cx="12"
-                cy="2"
-                r="0"
-                fill="currentColor"
-                transform="rotate(315 12 12)"
-              >
-                <animate
-                  attributeName="r"
-                  begin="0.875s"
-                  calcMode="spline"
-                  dur="1s"
-                  keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
-                  repeatCount="indefinite"
-                  values="0;2;0;0"
-                />
-              </circle>
-            </svg>
-          </div>
+          <Loading/>
         ) : (
           allProducts.map((items) => {
             return (
@@ -245,13 +108,13 @@ function HomeMenu() {
                     return (
                       <div className="card mt-5 sm:w-48 md:w-60 flex justify-center">
                         <div className="card-body flex flex-col justify-between bg-white p-3 ml-2 mr-2 xs:ml-7 xs:mr-7 md:ml-4 md:mr-4 rounded-2xl shadow-xl ">
-                          <div className="">
-                            <Link
-                              to={`/product-detail?reserve=${
-                                reserve == null ? false : reserve
-                              }`}
-                              className="cursor-pointer"
-                            >
+                          <Link
+                            to={`/product-detail?menu=${menu.id_menu}&reserve=${
+                              reserve == null ? false : reserve
+                            }`}
+                            className="cursor-pointer"
+                          >
+                            <div className="">
                               <img
                                 src={menu.url_gambar}
                                 alt=""
@@ -260,11 +123,11 @@ function HomeMenu() {
                               <h3 className="text-md sm:text-lg text-[#414141] font-bold">
                                 {menu.nama_menu}
                               </h3>
-                            </Link>
-                            <p className="text-xs sm:text-md text-[#414141]">
-                              {menu.deskripsi_menu}
-                            </p>
-                          </div>
+                              <p className="text-xs sm:text-md text-[#414141]">
+                                {menu.deskripsi_menu}
+                              </p>
+                            </div>
+                          </Link>
                           <div className="flex flex-row justify-between mt-2  items-center">
                             <p className="text-xs sm:text-md text-[#98694F] font-bold pr-1 sm:pr-0">
                               {formatRupiah(menu.harga_menu)}
