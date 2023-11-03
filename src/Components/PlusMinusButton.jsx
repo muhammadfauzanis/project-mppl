@@ -19,6 +19,18 @@ function PlusMinusButton(props) {
       sizeButton  = `text-sm sm:text-md`;
       break;
   }
+  
+  // handle button tambah
+  const increment = () => {
+    setCount(count + 1);
+  };
+
+  // handle button kurang
+  const decrement = () => {
+    if (count > 0) {
+      setCount(count - 1);
+    }
+  };
 
   return (
     <div className={styleDiv}>
