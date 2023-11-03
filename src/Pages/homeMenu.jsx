@@ -11,12 +11,11 @@ import Loading from "../Components/Loading";
 import { Helper } from "../Helper/Helper";
 
 function HomeMenu() {
-  const {formatRupiah,baseURLAPI,descriptionShort} = Helper();
+  const {formatRupiah,baseURLAPI,descriptionShort,isFixed} = Helper();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const reserve = params.get("reserve");
   const [isLoading, setIsLoading] = useState(true);
-  const [isFixed, setIsFixed] = useState(false);
 
   // GET PRODUCTS KOPI
   const [allProducts, setAllProducts] = useState([]);
@@ -35,17 +34,6 @@ function HomeMenu() {
   useEffect(() => {
     fetchDataCoffee();
   }, []);
-
-
-  const handleScroll = () => {
-    if (window.scrollY > 225) {
-      setIsFixed(true);
-    } else {
-      setIsFixed(false);
-    }
-  };
-
-  window.addEventListener("scroll", handleScroll);
 
   return (
     <div>

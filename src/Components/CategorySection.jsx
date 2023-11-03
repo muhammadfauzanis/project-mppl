@@ -1,20 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ListCategory from "./ListCategory";
 import { Link } from "react-scroll";
+import { Helper } from "../Helper/Helper";
+import axios from "axios";
+
 
 function CategorySection() {
-  const [isFixed, setIsFixed] = useState(false);
+  const {isFixed,baseURLAPI} = Helper();
 
-  // buat handle list category waktu nge scroll position jadi fixed
-  const handleScroll = () => {
-    if (window.scrollY > 230) {
-      setIsFixed(true);
-    } else {
-      setIsFixed(false);
+  // GET PRODUCTS KOPI
+  const [allProducts, setAllProducts] = useState([]);
+  const fetchDataCoffee = async () => {
+    try {
+      const response = await axios.get(baseURLAPI("all-product"));
+      setAllProducts(response.data);
+    } catch (error) {
+      console.error(error);
     }
   };
+  useEffect(() => {
+    fetchDataCoffee();
+  }, []);
 
-  window.addEventListener("scroll", handleScroll);
+  console.log(allProducts)
 
   return (
     <div className="px-7 mt-5">
@@ -34,7 +42,14 @@ function CategorySection() {
           }`}
         >
           <div className="flex gap-5 py-3 transition duration-300  overflow-x-auto scroll-smooth scrollbar-hide">
-            <Link to="kopi" smooth={true} duration={500} offset={-80}>
+            {allProducts.map((items,key) => {
+              return (
+                <Link to={items.nama_kategori_menu.toLowerCase().replace(" ", "-")} smooth={true} duration={500} offset={key === 0 ? -80 : 50}>
+                  <ListCategory imgPath="/coffe.png" text={items.nama_kategori_menu} />
+                </Link>
+              )
+            })}
+            {/* <Link to="kopi" smooth={true} duration={500} offset={-80}>
               <ListCategory imgPath="/coffe.png" text="Kopi" />
             </Link>
             <Link to="minuman" smooth={true} duration={500} offset={50}>
@@ -51,7 +66,7 @@ function CategorySection() {
             </Link>
             <Link to="">
               <ListCategory imgPath="/bibimbap.png" text="Makanan" />
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>
