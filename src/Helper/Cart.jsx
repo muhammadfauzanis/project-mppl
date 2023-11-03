@@ -1,16 +1,8 @@
 import { useEffect, useState } from "react";
 
 export const Cart = () => {
-    const [cart,setCart]    = useState([]);
-
-    const setToCart = () => {
-        const ls    = JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")) : [];
-        setCart(ls);
-    }
-
-    useEffect(() => {
-        setToCart();
-    })
+    const ls    = JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")) : [];
+    const [cart,setCart]    = useState(ls);
 
     const addCart = (id_menu, qty) => {
         id_menu     = parseInt(id_menu);
