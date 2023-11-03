@@ -1,12 +1,19 @@
 import { Link, useLocation } from "react-router-dom";
 import { BsArrowLeft } from "react-icons/bs";
 import Form from "../Components/Form";
+import { useState } from "react";
 
 function CheckoutForm() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const reserve = params.get("reserve");
   const id_menu = params.get("menu");
+
+  const [nomorMeja, setNomorMeja] = useState(reserve);
+
+  const handleNomorMejaChange = (event) => {
+    setNomorMeja(event.target.value);
+  };
   return (
     <div className="h-full bg-white max-w-lg mx-auto ">
       <div className="w-full bg-[#98694F]  p-5">
@@ -25,12 +32,19 @@ function CheckoutForm() {
       <div className="w-full mt-3 pb-80 ">
         <Form inputId="no-hp" judul="No Hp" placeholder="Masukkan nomor hp" />
         <Form inputId="nama" judul="Nama Pemesan" placeholder="Masukkan nama" />
-        <Form
-          inputId="no-meja"
-          judul="Nomor Meja"
-          placeholder="Masukkan nomor meja"
-          value={reserve}
-        />
+        <form action="" className="flex flex-col py-3 mx-auto w-[90%] bg-white">
+          <label className="font-bold">
+            Nomor Meja
+          </label>
+          <input
+            type="text"
+            id="no-meja"
+            value={nomorMeja === "false" ? " " : (nomorMeja)}
+            placeholder="Nomor meja"
+            onChange={handleNomorMejaChange}
+            className="border-2 border-[#98694F] p-4 rounded-lg"
+          />
+        </form>
       </div>
 
       <div className="w-full md:max-w-lg fixed bottom-0 bg-warnaBg flex flex-row p-3 justify-center items-center rounded-t-md">
