@@ -59,7 +59,9 @@ function HomeMenu() {
 
         {/* SEMUA PRODUK */}
         {isLoading ? (
-          <Loading/>
+          <div className="flex justify-center items-center" style={{minHeight : "calc(100vh - 105px)"}}>
+            <Loading/>
+          </div>
         ) : (
           allProducts.map((items) => {
             return (
