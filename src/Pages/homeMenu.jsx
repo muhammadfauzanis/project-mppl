@@ -8,13 +8,14 @@ import { Link, useLocation } from "react-router-dom";
 import PlusMinusButton from "../Components/PlusMinusButton";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import Loading from "../Components/Loading";
+import { Helper } from "../Helper/Helper";
 
 function HomeMenu() {
+  const { formatRupiah, isFixed } = Helper();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const reserve = params.get("reserve");
   const [isLoading, setIsLoading] = useState(true);
-  const [isFixed, setIsFixed] = useState(false);
 
   // GET PRODUCTS KOPI
   const [allProducts, setAllProducts] = useState([]);
@@ -36,29 +37,6 @@ function HomeMenu() {
   useEffect(() => {
     fetchDataCoffee();
   }, []);
-
-  // console.log(allProducts);
-
-  //FORMAT RUPIAH
-  const formatRupiah = (amount) => {
-    const formatter = new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-      minimumFractionDigits: 0,
-    });
-
-    return formatter.format(amount);
-  };
-
-  const handleScroll = () => {
-    if (window.scrollY > 225) {
-      setIsFixed(true);
-    } else {
-      setIsFixed(false);
-    }
-  };
-
-  window.addEventListener("scroll", handleScroll);
 
   return (
     <div>
