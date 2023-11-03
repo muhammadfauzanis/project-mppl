@@ -9,12 +9,10 @@ function CheckoutForm() {
   const reserve = params.get("reserve");
   const id_menu = params.get("menu");
 
-  // State untuk menyimpan nilai nomor meja yang bisa diubah oleh pengguna
-  const [nomorMeja, setNomorMeja] = useState(reserve);
+  const [reserveNumber, setReserveNumber] = useState(reserve);
 
-  // Fungsi untuk mengupdate nilai nomor meja saat input berubah
-  const handleNomorMejaChange = (event) => {
-    setNomorMeja(event.target.value);
+  const handleReserve = (event) => {
+    setReserveNumber(event.target.value);
   };
   return (
     <div className="h-full bg-white max-w-lg mx-auto ">
@@ -38,8 +36,8 @@ function CheckoutForm() {
           inputId="no-meja"
           judul="Nomor Meja"
           placeholder="Masukkan nomor meja"
-          value={nomorMeja === "false" ? "" : (nomorMeja)}
-          onChange={handleNomorMejaChange}
+          value={reserveNumber === "false" ? "" : (reserveNumber)}
+          onChange={handleReserve}
         />
       </div>
 
