@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
 export const Cart = () => {
-    const ls    = JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")) : [];
-    const [cart,setCart]    = useState(ls);
-
+    
     const addCart = (id_menu, qty) => {
+        const cart  = listCart();
         id_menu     = parseInt(id_menu);
         
-        let index    = cart.indexOf(getCart(id_menu));
+        let index   = cart.findIndex(menu => menu.id_menu == id_menu);
+
         if(qty < 1){
             return removeCart(id_menu);
         }
@@ -20,29 +20,30 @@ export const Cart = () => {
             cart[index].qty     = qty
         }
 
-        setCart(cart);
         localStorage.setItem("cart", JSON.stringify(cart));
     }
 
     const removeCart = (id_menu) => {
+        const cart  = listCart();
         id_menu     = parseInt(id_menu);
-        let index    = cart.indexOf(getCart(id_menu));
+        let index   = cart.findIndex(menu => menu.id_menu == id_menu);
         if(index >= 0){
             cart.splice(index, 1);
         }
-        setCart(cart);
         localStorage.setItem("cart", JSON.stringify(cart));
     }
 
     const resetCart = () => {
-        setCart([]);
+        const cart  = [];
         localStorage.setItem("cart", JSON.stringify(cart));
     }
 
     const listCart = () => {
+        const cart = JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")) : [];
         return cart;
     }
     const countCart = () => {
+        const cart  = listCart();
         return cart.length;
     }
 
@@ -56,6 +57,8 @@ export const Cart = () => {
     }
 
     const getCart = (id_menu) => {
+        const cart  = listCart();
+
         id_menu     = parseInt(id_menu);
         let obj = cart.find(o => parseInt(o.id_menu) === id_menu);
         return obj;

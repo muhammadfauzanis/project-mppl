@@ -120,7 +120,7 @@ function HomeMenu() {
                             <p className="text-xs sm:text-md text-[#98694F] font-bold pr-1 sm:pr-0">
                               {formatRupiah(menu.harga_menu)}
                             </p>
-                            <PlusMinusButton countStart={getQty(menu.id_menu)} />
+                            <PlusMinusButton menuId={menu.id_menu} countStart={getQty(menu.id_menu)} />
                             <button onClick={event => addCartHandler(event,menu.id_menu)}>
                               <BsFillCartPlusFill
                                 size={20}

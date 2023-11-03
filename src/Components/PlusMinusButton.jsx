@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { Cart } from "../Helper/Cart";
 
 function PlusMinusButton(props) {
-  let {countStart, variant}      = props;
+  let {countStart, variant,menuId}      = props;
+  const { addCart } = Cart();
+
   const [count, setCount] = useState(countStart ? countStart : 0); // default value nya 0
 
   let styleDiv      = ``;
@@ -23,12 +26,14 @@ function PlusMinusButton(props) {
   // handle button tambah
   const increment = () => {
     setCount(count + 1);
+    addCart(menuId,count+1);
   };
 
   // handle button kurang
   const decrement = () => {
     if (count > 0) {
       setCount(count - 1);
+      addCart(menuId,count-1);
     }
   };
 

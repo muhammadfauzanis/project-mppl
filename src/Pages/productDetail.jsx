@@ -81,7 +81,7 @@ function ProductDetail() {
               />
               <div className="relative  mb-14">
                 <div className="absolute inset-x-0 top-[-20px] flex items-center justify-center">
-                  <PlusMinusButton variant="detailMenu" countStart={getQty(id_menu)} />
+                  <PlusMinusButton menuId={product.id_menu}variant="detailMenu" countStart={getQty(id_menu)} />
                 </div>
               </div>
 
@@ -102,7 +102,7 @@ function ProductDetail() {
                 onClick={() => {
                   let qtyEl   = document.querySelectorAll(".qty-count")[0];
                   let qty     = parseInt(qtyEl.innerText);
-                  addCart(id_menu,qty);
+                  addCart(product.id_menu,qty);
                   showToastSuccess("Hidangan ditambahkan");
                 }}
                 className="flex flex-row justify-between p-4 w-[80%] mx-auto mt-6  bg-[#98694F] rounded-lg "
