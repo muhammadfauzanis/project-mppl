@@ -29,6 +29,9 @@ export const Cart = () => {
     const listCart = () => {
         return cart;
     }
+    const countCart = () => {
+        return cart.length;
+    }
 
     const getCart = (id_menu) => {
         id_menu     = parseInt(id_menu);
@@ -39,6 +42,8 @@ export const Cart = () => {
     return {
         addCart,
         removeCart,
-        listCart
+        listCart,
+        countCart,
+        getCart
     }
 };

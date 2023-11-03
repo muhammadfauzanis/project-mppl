@@ -102,7 +102,7 @@ function ProductDetail() {
                 onClick={() => {
                   showToastSuccess("Hidangan ditambahkan");
                   addCart(id_menu,10);
-                  listCart();
+                  console.log(listCart());
                 }}
                 className="flex flex-row justify-between p-4 w-[80%] mx-auto mt-6  bg-[#98694F] rounded-lg "
               >
