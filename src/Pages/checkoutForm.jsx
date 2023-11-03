@@ -9,8 +9,10 @@ function CheckoutForm() {
   const reserve = params.get("reserve");
   const id_menu = params.get("menu");
 
+  // State untuk menyimpan nilai nomor meja yang bisa diubah oleh pengguna
   const [nomorMeja, setNomorMeja] = useState(reserve);
 
+  // Fungsi untuk mengupdate nilai nomor meja saat input berubah
   const handleNomorMejaChange = (event) => {
     setNomorMeja(event.target.value);
   };
@@ -32,19 +34,13 @@ function CheckoutForm() {
       <div className="w-full mt-3 pb-80 ">
         <Form inputId="no-hp" judul="No Hp" placeholder="Masukkan nomor hp" />
         <Form inputId="nama" judul="Nama Pemesan" placeholder="Masukkan nama" />
-        <form action="" className="flex flex-col py-3 mx-auto w-[90%] bg-white">
-          <label className="font-bold">
-            Nomor Meja
-          </label>
-          <input
-            type="text"
-            id="no-meja"
-            value={nomorMeja === "false" ? " " : (nomorMeja)}
-            placeholder="Nomor meja"
-            onChange={handleNomorMejaChange}
-            className="border-2 border-[#98694F] p-4 rounded-lg"
-          />
-        </form>
+        <Form
+          inputId="no-meja"
+          judul="Nomor Meja"
+          placeholder="Masukkan nomor meja"
+          value={nomorMeja === "false" ? "" : (nomorMeja)}
+          onChange={handleNomorMejaChange}
+        />
       </div>
 
       <div className="w-full md:max-w-lg fixed bottom-0 bg-warnaBg flex flex-row p-3 justify-center items-center rounded-t-md">

@@ -7,7 +7,7 @@ Form.propTypes = {
   placeholder: PropTypes.string.isRequired,
 };
 
-function Form({ inputId, judul, placeholder, value }) {
+function Form({ inputId, judul, placeholder, value, onChange }) {
   
   return (
     <form action="" className="flex flex-col py-3 mx-auto w-[90%] bg-white">
@@ -18,6 +18,7 @@ function Form({ inputId, judul, placeholder, value }) {
         type="text"
         id={inputId}
         value={value}
+        onChange={onChange}
         placeholder={placeholder}
         className="border-2 border-[#98694F] p-4 rounded-lg"
       />
