@@ -9,8 +9,8 @@ function CheckoutForm() {
   const reserve = params.get("reserve");
   const id_menu = params.get("menu");
 
+  // HANDLE RESERVE
   const [reserveNumber, setReserveNumber] = useState(reserve);
-
   const handleReserve = (event) => {
     setReserveNumber(event.target.value);
   };
