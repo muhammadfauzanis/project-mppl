@@ -92,7 +92,7 @@ function ProductDetail() {
                   {formatRupiah(product.harga_menu)}
                 </p>
               </div>
-              <p className="p-5 text-sm h-full">
+              <p className="p-5 text-sm h-full text-justify">
                 {product.deskripsi_menu}
               </p>
             </div>

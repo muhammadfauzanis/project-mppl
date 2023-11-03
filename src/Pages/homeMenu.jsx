@@ -11,7 +11,7 @@ import Loading from "../Components/Loading";
 import { Helper } from "../Helper/Helper";
 
 function HomeMenu() {
-  const { formatRupiah , baseURLAPI} = Helper();
+  const {formatRupiah,baseURLAPI,descriptionShort} = Helper();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const reserve = params.get("reserve");
@@ -110,8 +110,8 @@ function HomeMenu() {
                               <h3 className="text-md sm:text-lg text-[#414141] font-bold">
                                 {menu.nama_menu}
                               </h3>
-                              <p className="text-xs sm:text-md text-[#414141]">
-                                {menu.deskripsi_menu}
+                              <p className="text-xs sm:text-md text-[#414141] text-justify">
+                                {descriptionShort(menu.deskripsi_menu)}
                               </p>
                             </div>
                           </Link>

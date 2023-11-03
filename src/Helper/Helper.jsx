@@ -16,9 +16,17 @@ export const Helper = () => {
         const baseURL   = 'https://jaba-coffee.000webhostapp.com/api/';
         return baseURL + url;
     }
+
+    const descriptionShort = (description = '') => {
+        if(description.length > 80){
+            description     = description.slice(0,80) + '...';
+        }
+        return description;
+    }
     
     return {
         formatRupiah,
-        baseURLAPI
+        baseURLAPI,
+        descriptionShort
     }
 };
