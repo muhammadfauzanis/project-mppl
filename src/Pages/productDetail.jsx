@@ -23,7 +23,7 @@ function ProductDetail() {
     try {
       const response = await axios.get(baseURLAPI(`menu/${id_menu}`));
       setProduct(response.data[0]);
-
+      
       setTimeout(() => {
         setIsLoading(false);
       }, 500);
@@ -34,9 +34,6 @@ function ProductDetail() {
   useEffect(() => {
     fetchDataMenu();
   }, []);
-
-  console.log(product);
-
 
   // TOAST SUKSES
   const showToastSuccess = (msg) => {
@@ -60,52 +57,62 @@ function ProductDetail() {
             <BsArrowLeft size={30} className="z-50 text-white" />
           </Link>
           <Link
-            to={`/checkout-form?reserve=${reserve == null ? false : reserve}`}
+            to={`/checkout-form?menu=${id_menu}&reserve=${reserve == null ? false : reserve}`}
           >
             <BsCartFill size={25} className="text-white" />
           </Link>
         </div>
         {isLoading ? (
-          <div className="flex justify-center items-center h-screen">
+          <div className="flex justify-center items-center" style={{minHeight : "calc(100vh - 105px)"}}>
             <Loading/>
           </div>
         ) : (
-          <div >
-            <img
-              src={product.url_gambar}
-              alt=""
-              className="w-full object-cover"
-              style={{aspectRatio : 3/2}}
-            />
-            <div className="relative  mb-14">
-              <div className="absolute inset-x-0 top-[-20px] flex items-center justify-center">
-                <PlusMinusButton variant="detailMenu" />
+          <>
+          {
+            product ? (
+            <div >
+              <img
+                src={product.url_gambar}
+                alt=""
+                className="w-full object-cover"
+                style={{aspectRatio : 3/2}}
+              />
+              <div className="relative  mb-14">
+                <div className="absolute inset-x-0 top-[-20px] flex items-center justify-center">
+                  <PlusMinusButton variant="detailMenu" />
+                </div>
               </div>
-            </div>
 
-            <div className="max-w-[80%] bg-white mx-auto pb-[115px]">
-              <div className="flex flex-row justify-between p-5">
-                <h3 className="text-md sm:text-lg text-[#414141] font-bold">
-                  {product.nama_menu}
-                </h3>
-                <p className="text-md sm:text-lg text-[#98694F] font-bold ">
-                  {formatRupiah(product.harga_menu)}
+              <div className="max-w-[80%] bg-white mx-auto pb-[115px]">
+                <div className="flex flex-row justify-between p-5">
+                  <h3 className="text-md sm:text-lg text-[#414141] font-bold">
+                    {product.nama_menu}
+                  </h3>
+                  <p className="text-md sm:text-lg text-[#98694F] font-bold ">
+                    {formatRupiah(product.harga_menu)}
+                  </p>
+                </div>
+                <p className="p-5 text-sm h-full text-justify">
+                  {product.deskripsi_menu}
                 </p>
               </div>
-              <p className="p-5 text-sm h-full text-justify">
-                {product.deskripsi_menu}
-              </p>
+              <button
+                onClick={() => {
+                  showToastSuccess("Hidangan ditambahkan");
+                }}
+                className="flex flex-row justify-between p-4 w-[80%] mx-auto mt-6  bg-[#98694F] rounded-lg "
+              >
+                <h3 className="text-white font-semibold">Tambah Ke Keranjang</h3>
+                <BsFillCartPlusFill size={30} className="text-white" />
+              </button>
             </div>
-            <button
-              onClick={() => {
-                showToastSuccess("Hidangan ditambahkan");
-              }}
-              className="flex flex-row justify-between p-4 w-[80%] mx-auto mt-6  bg-[#98694F] rounded-lg "
-            >
-              <h3 className="text-white font-semibold">Tambah Ke Keranjang</h3>
-              <BsFillCartPlusFill size={30} className="text-white" />
-            </button>
-          </div>
+            ) : (
+              <div className="flex justify-center items-center" style={{minHeight : "calc(100vh - 105px)"}}>
+                <h1 className="font-bold text-lg">Menu Tidak Ditemukan</h1>
+              </div>
+            )
+          }
+          </>
         )}
       </div>
     </div>

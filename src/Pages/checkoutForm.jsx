@@ -6,10 +6,11 @@ function CheckoutForm() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const reserve = params.get("reserve");
+  const id_menu = params.get("menu");
   return (
     <div className="h-full bg-white max-w-lg mx-auto ">
       <div className="w-full bg-[#98694F]  p-5">
-        <Link to="/product-detail" className="cursor-pointer">
+        <Link to={id_menu !== null ? `/product-detail?menu=${id_menu}` : `/`} className="cursor-pointer">
           <BsArrowLeft size={30} className="text-white" />
         </Link>
       </div>

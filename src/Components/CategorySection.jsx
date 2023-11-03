@@ -22,7 +22,6 @@ function CategorySection() {
     fetchDataCoffee();
   }, []);
 
-  console.log(allProducts)
 
   return (
     <div className="px-7 mt-5">
