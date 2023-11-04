@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 
 export const Cart = () => {
+
+    useEffect(() => {
+        console.log(countQty())
+    })
     
     const addCart = (id_menu, qty) => {
         const cart  = listCart();
@@ -52,7 +56,6 @@ export const Cart = () => {
         listCart().map((item) => {
             count += parseInt(item.qty)
         })
-
         return count;
     }
 
@@ -81,6 +84,6 @@ export const Cart = () => {
         getCart,
         resetCart,
         getQty,
-        countQty
+        countQty,
     }
 };
