@@ -57,12 +57,15 @@ export const Cart = () => {
             count += parseInt(item.qty)
         })
         const count_qty_el     = document.getElementById("count_qty");
-        if(count > 0){
-            count_qty_el.classList.remove("hidden");
-            count_qty_el.innerHTML = count;
-        }else{
-            count_qty_el.classList.add("hidden");
-            count_qty_el.innerHTML = '';
+        if(count_qty_el !== null){
+
+            if(count > 0){
+                count_qty_el.classList.remove("hidden");
+                count_qty_el.innerHTML = count;
+            }else{
+                count_qty_el.classList.add("hidden");
+                count_qty_el.innerHTML = '';
+            }
         }
         return count;
     }
