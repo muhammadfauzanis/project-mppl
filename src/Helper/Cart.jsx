@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 export const Cart = () => {
 
     useEffect(() => {
-        console.log(countQty())
+        countQty()
     })
     
     const addCart = (id_menu, qty) => {
@@ -56,6 +56,14 @@ export const Cart = () => {
         listCart().map((item) => {
             count += parseInt(item.qty)
         })
+        const count_qty_el     = document.getElementById("count_qty");
+        if(count > 0){
+            count_qty_el.classList.remove("hidden");
+            count_qty_el.innerHTML = count;
+        }else{
+            count_qty_el.classList.add("hidden");
+            count_qty_el.innerHTML = '';
+        }
         return count;
     }
 
