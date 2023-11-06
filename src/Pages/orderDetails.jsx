@@ -3,6 +3,7 @@ import { Cart } from "../Helper/Cart";
 import { Helper } from "../Helper/Helper";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 // import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 
 
@@ -99,7 +100,9 @@ function OrderDetails() {
   return (
     <div className="h-full max-w-lg mx-auto bg-warnaBg">
       <div className="flex items-center  p-3 bg-[#98694F] text-white">
-        <BsArrowLeft size={30} />
+        <Link to={`/checkout-form?reserve=false`} className="cursor-pointer">
+          <BsArrowLeft size={30} className="text-white" />
+        </Link>
 
         <h3 className="mx-auto text-xl">Rincian Pesanan</h3>
       </div>
