@@ -3,7 +3,7 @@ import { Cart } from "../Helper/Cart";
 import { Helper } from "../Helper/Helper";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 // import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 
 
@@ -13,6 +13,12 @@ function OrderDetails() {
   const [listItem,setListItem]  = useState([]);
   const [totalPrice,setTotalPrice] = useState(0);
   const [dateTime,setDateTime] = useState('');
+
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const reserve = params.get("reserve");
+  const no_hp = params.get("no_hp");
+  const nama = params.get("nama");
 
   const handleList  = async () => {
     const response = await axios.post(baseURLAPI("order-details"),{'cart' : listCart()}).then((response)=> {
@@ -100,17 +106,17 @@ function OrderDetails() {
           <h2 className="font-bold text-lg ">Java Caffe</h2>
           <p className="text-xs">Alamat Palsu</p>
         </div>
-        <p className="text-2xl font-bold">M8</p>
+        <p className="text-2xl font-bold">{reserve && reserve.toUpperCase()}</p>
       </div>
       <div className="bg-white py-[17px] px-4 rounded-sm">
         <div className="border-2 border-neutral-400 rounded-md p-3">
           <div className="flex justify-between">
             <p>Nama Pembeli</p>
-            <p>Hilmi</p>
+            <p>{nama}</p>
           </div>
           <div className="flex justify-between">
             <p>No Telepon</p>
-            <p>082674572373</p>
+            <p>{no_hp}</p>
           </div>
         </div>
         <div className="mt-[20px] border-t-2 border-neutral-400 pt-[10px] px4   ">
