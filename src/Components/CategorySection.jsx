@@ -12,7 +12,7 @@ function CategorySection() {
   const [allProducts, setAllProducts] = useState([]);
   const fetchDataCoffee = async () => {
     try {
-      const response = await axios.get(baseURLAPI("all-product"));
+      const response = await axios.get(baseURLAPI("all-category-product"));
       setAllProducts(response.data);
     } catch (error) {
       console.error(error);

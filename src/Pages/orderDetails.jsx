@@ -15,21 +15,10 @@ function OrderDetails() {
   const [dateTime,setDateTime] = useState('');
 
   const handleList  = async () => {
-    const result  = [];
-    let total     = 0;
-    listCart().map(async row => {
-      const response = await axios.get(baseURLAPI("menu/"+row.id_menu)).then((response)=> {
-        if(response.data.length > 0){
-          let data    = response.data[0]
-          data.qty  = row.qty;
-          result.push(data);
-          setListItem(result);
-
-          total   = total + (parseInt(data.harga_menu) * row.qty)
-          setTotalPrice(total);
-        }
-      });
-    })
+    const response = await axios.post(baseURLAPI("order-details"),{'cart' : listCart()}).then((response)=> {
+      setListItem(response.data.cart);
+      setTotalPrice(response.data.total_price);
+    });
   }
 
   const handleDateTime  = () => {

@@ -1,13 +1,30 @@
 import { Link, useLocation } from "react-router-dom";
 import { BsArrowLeft } from "react-icons/bs";
 import Form from "../Components/Form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Cart } from "../Helper/Cart";
+import { Helper } from "../Helper/Helper";
+import axios from "axios";
 
 function CheckoutForm() {
+  const {listCart} = Cart();
+  const {baseURLAPI,formatRupiah} = Helper();
+  const [totalPrice,setTotalPrice] = useState(0);
+
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const reserve = params.get("reserve");
   const id_menu = params.get("menu");
+
+  const handleTotal  = async () => {
+    const response = await axios.post(baseURLAPI("order-details"),{'cart' : listCart()}).then((response)=> {
+      setTotalPrice(response.data.total_price);
+    });
+  }
+
+  useEffect(() => {
+    handleTotal();
+  },[])
 
   // HANDLE RESERVE
   const [reserveNumber, setReserveNumber] = useState(reserve);
@@ -46,8 +63,8 @@ function CheckoutForm() {
           Total Bayar:{" "}
         </h3>
         <p className="text-sm sm:text-md font-bold text-black ml-1">
-          {" "}
-          Rp.17000
+          {formatRupiah(totalPrice)}
+          {/* Rp.17000 */}
         </p>
         <button className="p-2 sm:p-3 w-[40%] sm:w-[50%] mx-auto bg-[#98694F] rounded-lg ">
           <h3 className="text-white text-sm sm:text-md font-semibold">
