@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BsArrowLeft } from "react-icons/bs";
 import Form from "../Components/Form";
 import { useEffect, useState } from "react";
@@ -10,6 +10,8 @@ function CheckoutForm() {
   const {listCart} = Cart();
   const {baseURLAPI,formatRupiah} = Helper();
   const [totalPrice,setTotalPrice] = useState(0);
+
+  const navigate = useNavigate();
 
   const location = useLocation();
   const params = new URLSearchParams(location.search);
@@ -31,8 +33,17 @@ function CheckoutForm() {
   const handleReserve = (event) => {
     setReserveNumber(event.target.value);
   };
+
+  const handleForm  = (e) => {
+    e.preventDefault();
+    const noHP    = document.getElementById('no-hp').value;
+    const nama    = document.getElementById('nama').value;
+    const reserve = document.getElementById('no-meja').value;
+
+    navigate(`/order-detail?no_hp=${noHP}&nama=${nama}&reserve=${reserve}`);
+  }
   return (
-    <div className="h-full bg-white max-w-lg mx-auto ">
+    <form onSubmit={handleForm} className="h-full bg-white max-w-lg mx-auto ">
       <div className="w-full bg-[#98694F]  p-5">
         <Link to={id_menu !== null ? `/product-detail?menu=${id_menu}` : `/`} className="cursor-pointer">
           <BsArrowLeft size={30} className="text-white" />
@@ -53,7 +64,7 @@ function CheckoutForm() {
           inputId="no-meja"
           judul="Nomor Meja"
           placeholder="Masukkan nomor meja"
-          value={reserveNumber === "false" ? "" : (reserveNumber)}
+          value={reserveNumber === "false" ? "" : (reserveNumber && reserveNumber.toUpperCase())}
           onChange={handleReserve}
         />
       </div>
@@ -66,13 +77,13 @@ function CheckoutForm() {
           {formatRupiah(totalPrice)}
           {/* Rp.17000 */}
         </p>
-        <button className="p-2 sm:p-3 w-[40%] sm:w-[50%] mx-auto bg-[#98694F] rounded-lg ">
+        <button type="submit" className="p-2 sm:p-3 w-[40%] sm:w-[50%] mx-auto bg-[#98694F] rounded-lg ">
           <h3 className="text-white text-sm sm:text-md font-semibold">
             Pilih metode pembayaran
           </h3>
         </button>
       </div>
-    </div>
+    </form>
   );
 }
 
