@@ -1,32 +1,34 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { BsArrowLeft } from "react-icons/bs";
-import Form from "../Components/Form";
-import { useEffect, useState } from "react";
-import { Cart } from "../Helper/Cart";
-import { Helper } from "../Helper/Helper";
-import axios from "axios";
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { BsArrowLeft } from 'react-icons/bs';
+import Form from '../Components/Form';
+import { useEffect, useState } from 'react';
+import { Cart } from '../Helper/Cart';
+import { Helper } from '../Helper/Helper';
+import axios from 'axios';
 
 function CheckoutForm() {
-  const {listCart} = Cart();
-  const {baseURLAPI,formatRupiah} = Helper();
-  const [totalPrice,setTotalPrice] = useState(0);
+  const { listCart } = Cart();
+  const { baseURLAPI, formatRupiah } = Helper();
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const navigate = useNavigate();
 
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const reserve = params.get("reserve");
-  const id_menu = params.get("menu");
+  const reserve = params.get('reserve');
+  const id_menu = params.get('menu');
 
-  const handleTotal  = async () => {
-    const response = await axios.post(baseURLAPI("order-details"),{'cart' : listCart()}).then((response)=> {
-      setTotalPrice(response.data.total_price);
-    });
-  }
+  const handleTotal = async () => {
+    const response = await axios
+      .post(baseURLAPI('order-details'), { cart: listCart() })
+      .then((response) => {
+        setTotalPrice(response.data.total_price);
+      });
+  };
 
   useEffect(() => {
     handleTotal();
-  },[])
+  }, []);
 
   // HANDLE RESERVE
   const [reserveNumber, setReserveNumber] = useState(reserve);
@@ -34,18 +36,21 @@ function CheckoutForm() {
     setReserveNumber(event.target.value);
   };
 
-  const handleForm  = (e) => {
+  const handleForm = (e) => {
     e.preventDefault();
-    const noHP    = document.getElementById('no-hp').value;
-    const nama    = document.getElementById('nama').value;
+    const noHP = document.getElementById('no-hp').value;
+    const nama = document.getElementById('nama').value;
     const reserve = document.getElementById('no-meja').value;
 
     navigate(`/order-detail?no_hp=${noHP}&nama=${nama}&reserve=${reserve}`);
-  }
+  };
   return (
     <form onSubmit={handleForm} className="h-full bg-white max-w-lg mx-auto ">
       <div className="w-full bg-[#98694F]  p-5">
-        <Link to={id_menu !== null ? `/product-detail?menu=${id_menu}` : `/`} className="cursor-pointer">
+        <Link
+          to={id_menu !== null ? `/product-detail?menu=${id_menu}` : `/`}
+          className="cursor-pointer"
+        >
           <BsArrowLeft size={30} className="text-white" />
         </Link>
       </div>
@@ -64,20 +69,27 @@ function CheckoutForm() {
           inputId="no-meja"
           judul="Nomor Meja"
           placeholder="Masukkan nomor meja"
-          value={reserveNumber === "false" ? "" : (reserveNumber && reserveNumber.toUpperCase())}
+          value={
+            reserveNumber === 'false'
+              ? ''
+              : reserveNumber && reserveNumber.toUpperCase()
+          }
           onChange={handleReserve}
         />
       </div>
 
       <div className="w-full md:max-w-lg fixed bottom-0 bg-warnaBg flex flex-row p-3 justify-center items-center rounded-t-md">
         <h3 className="text-sm sm:text-md font-bold text-black ml-3">
-          Total Bayar:{" "}
+          Total Bayar:{' '}
         </h3>
         <p className="text-sm sm:text-md font-bold text-black ml-1">
           {formatRupiah(totalPrice)}
           {/* Rp.17000 */}
         </p>
-        <button type="submit" className="p-2 sm:p-3 w-[40%] sm:w-[50%] mx-auto bg-[#98694F] rounded-lg ">
+        <button
+          type="submit"
+          className="p-2 sm:p-3 w-[40%] sm:w-[50%] mx-auto bg-[#98694F] rounded-lg "
+        >
           <h3 className="text-white text-sm sm:text-md font-semibold">
             Pilih metode pembayaran
           </h3>
