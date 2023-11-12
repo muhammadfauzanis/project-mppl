@@ -4,7 +4,7 @@ import { Helper } from '../Helper/Helper';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useLocation } from 'react-router-dom';
-import PaymentMethod from '../Components/PaymentMethod';
+// import PaymentMethod from '../Components/PaymentMethod';
 // import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import { AiOutlineClose } from 'react-icons/ai';
