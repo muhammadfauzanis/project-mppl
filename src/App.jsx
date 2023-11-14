@@ -3,6 +3,7 @@ import ProductDetail from './Pages/productDetail';
 import CheckoutForm from './Pages/checkoutForm';
 import OrderDetails from './Pages/orderDetails';
 import HomeMenu from './Pages/homeMenu';
+import NotFoundPage from './Pages/notFoundPage';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/product-detail" element={<ProductDetail />} />
           <Route path="/checkout-form" element={<CheckoutForm />} />
           <Route path="/order-detail" element={<OrderDetails />} />
+          <Route path="/*" element={<NotFoundPage />} />
         </Routes>
       </Router>
     </div>
