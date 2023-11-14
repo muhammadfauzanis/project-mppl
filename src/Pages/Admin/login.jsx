@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { Helper } from '../../Helper/Helper';
+import { useAuth } from '../../Helper/useAuth';
 
 function Login() {
 
-    let navigate 					= useNavigate();
+	let navigate 					= useNavigate();
+	const {authed,setAsLogin} 		= useAuth();
 	const {baseURLAPI}				= Helper();
 	const [errorMsg, setErrorMsg]	= useState('');
 	const [isLoading, setIsLoading]	= useState(false);
@@ -18,12 +20,11 @@ function Login() {
 		e.preventDefault();
 		setIsLoading(true);
 		setErrorMsg("");
-		
 		await axios.get(baseURLAPI('../sanctum/csrf-cookie'));
 		await axios.post(baseURLAPI("/login"),formData,{withCredentials : true})
 		.then(response => {
 			setIsLoading(false);
-			navigate("/admin/dashboard");
+			setAsLogin('admin');
 		}).catch(error => {
 			if(error.response){
 				setErrorMsg(error.response.data.message);
@@ -38,6 +39,12 @@ function Login() {
 			[name]: value
 		}));
 	};
+
+	useEffect(() => {
+		if(authed){
+			return navigate("/admin/dashboard")
+		}
+	},[authed])
 
 
 	return (

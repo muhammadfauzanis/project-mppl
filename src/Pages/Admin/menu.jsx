@@ -2,20 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../Helper/useAuth';
 import { Link, useNavigate } from 'react-router-dom';
 
-function Dashboard() {
+function Menu() {
 
 	let navigate 					= useNavigate();
-	const {authed,logout} 			= useAuth();
+	const {authed} 					= useAuth();
 	const [errorMsg, setErrorMsg] 	= useState('');
 	const [isLoading, setIsLoading] = useState(false);
 	const [formData, setFormData] 	= useState({
 		username : '',
 		password : '',
 	});
-
-	const handleLogout = () => {
-		logout();
-	}
 
 	useEffect(() => {
 		if(!authed){
@@ -25,11 +21,10 @@ function Dashboard() {
 
 	return (
 		<>
-			<h1>Dashboard</h1>
-			<Link to="/admin/menu">MENU</Link>
-			<button onClick={handleLogout}>Logout</button>
+			<h1>Menu</h1>
+            <Link to="/admin/dashboard">DASHBOARD</Link>
 		</>
 	);
 }
 
-export default Dashboard;
+export default Menu;

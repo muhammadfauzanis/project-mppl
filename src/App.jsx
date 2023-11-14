@@ -7,6 +7,7 @@ import NotFoundPage from './Pages/notFoundPage';
 
 import AdminLogin from './Pages/Admin/login';
 import AdminDashboard from './Pages/Admin/dashboard';
+import AdminMenu from './Pages/Admin/menu';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
 
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/menu" element={<AdminMenu />} />
         </Routes>
       </Router>
     </div>
