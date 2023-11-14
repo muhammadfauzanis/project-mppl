@@ -18,6 +18,7 @@ function Login() {
 		e.preventDefault();
 		setIsLoading(true);
 		setErrorMsg("");
+		
 		await axios.get(baseURLAPI('../sanctum/csrf-cookie'));
 		await axios.post(baseURLAPI("/login"),formData,{withCredentials : true})
 		.then(response => {
@@ -38,9 +39,6 @@ function Login() {
 		}));
 	};
 
-	useEffect( () => {
-		
-	},[])
 
 	return (
 		<>

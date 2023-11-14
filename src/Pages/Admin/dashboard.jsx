@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Helper } from '../../Helper/Helper';
 
-function Login() {
+function Dashboard() {
 
 	const [errorMsg, setErrorMsg] 	= useState('');
 	const [isLoading, setIsLoading] = useState(false);
@@ -17,4 +17,4 @@ function Login() {
 	);
 }
 
-export default Login;
+export default Dashboard;
