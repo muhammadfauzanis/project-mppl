@@ -1,7 +1,10 @@
+import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Helper = () => {
     
+    let navigate = useNavigate();
     const [isFixed, setIsFixed] = useState(false);
     const handleScroll = () => {
         if (window.scrollY > 225) {
@@ -34,7 +37,7 @@ export const Helper = () => {
         }
         return description;
     }
-    
+
     return {
         isFixed,
         formatRupiah,

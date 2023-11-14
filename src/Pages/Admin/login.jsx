@@ -1,18 +1,18 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Helper } from '../../Helper/Helper';
 
 function Login() {
 
-  const { formatRupiah, baseURLAPI, descriptionShort, isFixed } = Helper();
-  const [errorMsg, setErrorMsg] 	= useState('');
-	const [isLoading, setIsLoading] = useState(false);
+    let navigate 					= useNavigate();
+	const {baseURLAPI}				= Helper();
+	const [errorMsg, setErrorMsg]	= useState('');
+	const [isLoading, setIsLoading]	= useState(false);
 	const [formData, setFormData] 	= useState({
 		username : '',
 		password : '',
 	});
-	const {navigate} 	= useNavigate();
 
 	const handleSubmit 	= async (e) => {
 		e.preventDefault();
@@ -22,8 +22,7 @@ function Login() {
 		await axios.post(baseURLAPI("/login"),formData,{withCredentials : true})
 		.then(response => {
 			setIsLoading(false);
-			// navigate("/admin");
-			getUser();
+			navigate("/admin/dashboard");
 		}).catch(error => {
 			if(error.response){
 				setErrorMsg(error.response.data.message);
@@ -39,19 +38,14 @@ function Login() {
 		}));
 	};
 
-	const getUser 	= async () => {
-		await axios.get(baseURLAPI("/user"),{withCredentials : true})
-		.then(response => {
-			console.log(response.data);
-		}).catch(error => {
-			console.log(error);
-		})
-	}
+	useEffect( () => {
+		
+	},[])
 
 	return (
 		<>
 			<div className='flex min-h-screen items-center'>
-				<div className='p-5 shadow border border-gray-200 rounded w-96 mx-auto'>
+				<div className='p-5 my-10 shadow border border-gray-200 rounded w-96 mx-auto'>
 					<h3 className='my-5 text-center font-bold text-2xl'>Log In</h3>
 					{
 						errorMsg !== "" && (

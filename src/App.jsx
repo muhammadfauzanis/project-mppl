@@ -6,6 +6,7 @@ import HomeMenu from './Pages/homeMenu';
 import NotFoundPage from './Pages/notFoundPage';
 
 import AdminLogin from './Pages/Admin/login';
+import AdminDashboard from './Pages/Admin/dashboard';
 
 function App() {
   return (
@@ -19,8 +20,8 @@ function App() {
           <Route path="/*" element={<NotFoundPage />} />
 
 
-
           <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
         </Routes>
       </Router>
     </div>
