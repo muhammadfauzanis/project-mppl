@@ -193,8 +193,7 @@ function OrderDetails() {
           Bayar Sekarang
         </button>
       </div>
-      <div
-        className={`absolute transition-all duration-700 ease-in-out ${
+      <div className={`fixed transition-all duration-700 ease-in-out ${
           openPayment ? 'top-[100px] ' : 'top-full'
         } `}
       >

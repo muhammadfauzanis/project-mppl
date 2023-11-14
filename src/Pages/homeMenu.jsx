@@ -89,19 +89,13 @@ function HomeMenu() {
                       : 'translate-y-0 transition-transform duration-1000'
                   }`}
                 >
-                  <h1
-                    className="w-full font-bold ms-10"
-                    style={{ marginBottom: '-30px' }}
-                  >
+                  <h1 className="w-full font-bold ms-10">
                     {items.nama_kategori_menu}
                   </h1>
                   {items.menu.map((menu) => {
                     return (
-                      <div
-                        key={menu.id_menu}
-                        className="card mt-5 sm:w-48 md:w-60 flex justify-center"
-                      >
-                        <div className="card-body flex flex-col justify-between bg-white p-3 ml-2 mr-2 xs:ml-7 xs:mr-7 md:ml-4 md:mr-4 rounded-2xl shadow-xl ">
+                      <div key={menu.id_menu} className="card sm:w-48 md:w-60 flex justify-center">
+                        <div className="card-body md:my-[10px] my-1 flex flex-col justify-between bg-white p-3 ml-2 mr-2 md:ml-4 md:mr-4 rounded-2xl shadow-xl ">
                           <Link
                             to={`/product-detail?menu=${menu.id_menu}&reserve=${
                               reserve == null ? false : reserve
@@ -145,6 +139,12 @@ function HomeMenu() {
                       </div>
                     );
                   })}
+
+                  {
+                    items.menu.length % 2 !== 0 && (
+                      <div className="card mt-5 sm:w-48 md:w-60 flex justify-center"></div>
+                    )
+                  }
                 </div>
               </div>
             );
