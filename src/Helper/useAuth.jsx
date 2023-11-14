@@ -1,11 +1,9 @@
 import * as React from "react";
 import { Cookies } from 'react-cookie';
-import { Navigate, useNavigate } from "react-router-dom";
-
-const authContext = React.createContext();
+// import { useNavigate } from "react-router-dom";
 
 export function useAuth() {
-	let navigate 				= useNavigate();
+	// let navigate 				= useNavigate();
 	const cookie 				= new Cookies();
 	const [authed, setAuthed] 	= React.useState(cookie.get("is_auth"));
 	const [role, setRole] 		= React.useState(cookie.get("role"));
@@ -36,13 +34,4 @@ export function useAuth() {
 		logout,
 		setAsLogin,
 	};
-}
-
-export function AuthProvider({ children }) {
-	const auth = useAuth();
-	return <authContext.Provider value={auth}>{children}</authContext.Provider>;
-}
-
-export default function AuthConsumer() {
-	return React.useContext(authContext);
 }
