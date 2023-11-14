@@ -6,8 +6,9 @@ import axios from 'axios';
 import { Link, useLocation } from 'react-router-dom';
 // import PaymentMethod from '../Components/PaymentMethod';
 // import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
-import { MdKeyboardArrowRight } from 'react-icons/md';
-import { AiOutlineClose } from 'react-icons/ai';
+// import { MdKeyboardArrowRight } from 'react-icons/md';
+// import { AiOutlineClose } from 'react-icons/ai';
+import PaymentMethod from '../Components/PaymentMethod';
 
 function OrderDetails() {
   const { listCart } = Cart();
@@ -97,7 +98,7 @@ function OrderDetails() {
   }, []);
 
   return (
-    <div className="max-w-lg mx-auto bg-warnaBg ">
+    <div className="max-w-lg  mx-auto bg-warnaBg ">
       <div className="flex items-center  p-3 bg-[#98694F] text-white z-50">
         <Link to={`/checkout-form?reserve=false`} className="cursor-pointer">
           <BsArrowLeft size={30} className="text-white" />
@@ -193,43 +194,12 @@ function OrderDetails() {
         </button>
       </div>
       <div
-        className={`absolute transition-all duration-700 ease-in-out  ${
+        className={`absolute transition-all duration-700 ease-in-out ${
           openPayment ? 'top-[100px] ' : 'top-full'
         } `}
       >
-        <div className=" bg-white h-[80%] w-full p-6 rounded-t-lg pb-[350px]">
-          <div className="flex items-center justify-between pb-5">
-            <h1 className="text-lg font-bold">Pilih metode pembayaran</h1>
-            <AiOutlineClose
-              size={20}
-              className="cursor-pointer"
-              onClick={() => setOpenPayment(!openPayment)}
-            />
-          </div>
-          <div className="mb-5 ">
-            <div className="flex items-center justify-between px-4 mb-5 border-2 cursor-pointer">
-              <div className="flex items-center gap-x-20">
-                <img src="/qris.svg" alt="" className="w-[20%]" />
-                <p>QRIS</p>
-              </div>
-              <MdKeyboardArrowRight size={20} />
-            </div>
-            <div className="flex items-center justify-between px-4 mb-5 border-2 cursor-pointer">
-              <div className="flex items-center gap-x-20">
-                <img src="/qris.svg" alt="" className="w-[20%]" />
-                <p>QRIS</p>
-              </div>
-              <MdKeyboardArrowRight size={20} />
-            </div>
-            <div className="flex items-center justify-between px-4 mb-5 border-2 cursor-pointer">
-              <div className="flex items-center gap-x-20">
-                <img src="/qris.svg" alt="" className="w-[20%]" />
-                <p>QRIS</p>
-              </div>
-              <MdKeyboardArrowRight size={20} />
-            </div>
-          </div>
-        </div>
+        {/* Payment method container */}
+        <PaymentMethod setOpenPayment={setOpenPayment} />
       </div>
     </div>
   );
