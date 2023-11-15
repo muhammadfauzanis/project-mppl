@@ -21,7 +21,7 @@ function Login() {
 		setIsLoading(true);
 		setErrorMsg("");
 		await axios.get(baseURLAPI('../sanctum/csrf-cookie'));
-		await axios.post(baseURLAPI("/login"),formData,{withCredentials : true})
+		await axios.post(baseURLAPI("/admin/login"),formData,{withCredentials : true})
 		.then(response => {
 			setIsLoading(false);
 			setAsLogin('admin');
