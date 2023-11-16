@@ -1,6 +1,5 @@
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import { AiOutlineClose } from 'react-icons/ai';
-import { useState } from 'react';
 
 const PaymentMethod = ({ setOpenPayment }) => {
   const paymentOption = [
@@ -19,8 +18,9 @@ const PaymentMethod = ({ setOpenPayment }) => {
         />
       </div>
       <div className="">
-        {paymentOption.map((payment) => (
+        {paymentOption.map((payment,key) => (
           <PaymentMethodOption
+            key={`pm_${key}`}
             paymentName={payment.paymentName}
             imgSrc={payment.imgSrc}
           />
