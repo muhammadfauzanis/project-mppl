@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../Helper/useAuth';
 import { Link, useNavigate } from 'react-router-dom';
+import AdminNavbar from '../../Components/AdminNavbar';
 
 function Menu() {
 
-	let navigate 					= useNavigate();
-	const {authed} 					= useAuth();
-	const [errorMsg, setErrorMsg] 	= useState('');
-	const [isLoading, setIsLoading] = useState(false);
-	const [formData, setFormData] 	= useState({
-		username : '',
-		password : '',
-	});
+	let navigate			= useNavigate();
+	const {authed} 			= useAuth();
 
 	useEffect(() => {
 		if(!authed){
@@ -21,8 +16,9 @@ function Menu() {
 
 	return (
 		<>
-			<h1>Menu</h1>
-            <Link to="/admin/dashboard">DASHBOARD</Link>
+			<AdminNavbar page={"menu"}>
+				Halaman Menu
+			</AdminNavbar>
 		</>
 	);
 }

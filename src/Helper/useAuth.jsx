@@ -2,10 +2,10 @@ import axios from "axios";
 import * as React from "react";
 import { Cookies } from 'react-cookie';
 import { Helper } from "./Helper";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export function useAuth() {
-	// let navigate 				= useNavigate();
+	let navigate 				= useNavigate();
 	const cookie 				= new Cookies();
 	const [authed, setAuthed] 	= React.useState(cookie.get("is_auth"));
 	const [role, setRole] 		= React.useState(cookie.get("role"));
@@ -31,6 +31,7 @@ export function useAuth() {
 			cookie.remove('role', {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});
 			setAuthed(false);
 			setRole('');
+			navigate("/admin/login");
 		})
 	}
 
@@ -39,7 +40,7 @@ export function useAuth() {
 			await axios.get(baseURLAPI("/admin/user"),{withCredentials: true})
 			.then((response) => {
 				setAsLogin(response.data.role)
-			})
+			}) 
 			.catch(() => {
 				cookie.remove('is_auth', {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});
 				cookie.remove('role', {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});
