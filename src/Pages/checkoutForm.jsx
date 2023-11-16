@@ -20,7 +20,7 @@ function CheckoutForm() {
   const id_menu = params.get('menu');
 
   const handleTotal = async () => {
-    const response = await axios
+    await axios
       .post(baseURLAPI('order-details'), { cart: listCart() })
       .then((response) => {
         setTotalPrice(response.data.total_price);
@@ -58,57 +58,59 @@ function CheckoutForm() {
     navigate(`/order-detail`);
   };
   return (
-    <form onSubmit={handleForm} className="h-full bg-white max-w-lg mx-auto ">
-      <div className="w-full bg-[#98694F]  p-5">
-        <Link
-          to={id_menu !== null ? `/product-detail?menu=${id_menu}` : `/?reserve=${reserveNumber}`}
-          className="cursor-pointer"
-        >
-          <BsArrowLeft size={30} className="text-white" />
-        </Link>
-      </div>
+    <>
+      <form onSubmit={handleForm} className="h-full bg-white max-w-lg mx-auto ">
+        <div className="w-full bg-[#98694F]  p-5">
+          <Link
+            to={id_menu !== null ? `/product-detail?menu=${id_menu}` : `/?reserve=${reserveNumber}`}
+            className="cursor-pointer"
+          >
+            <BsArrowLeft size={30} className="text-white" />
+          </Link>
+        </div>
 
-      <div className="p-5 bg-warnaBg ">
-        <h3 className="font-bold text-lg">Informasi Pembeli</h3>
-        <p className="text-md">
-          Untuk pengiriman bukti faktur pembelian dan pengiriman
-        </p>
-      </div>
+        <div className="p-5 bg-warnaBg ">
+          <h3 className="font-bold text-lg">Informasi Pembeli</h3>
+          <p className="text-md">
+            Untuk pengiriman bukti faktur pembelian dan pengiriman
+          </p>
+        </div>
 
-      <div className="w-full mt-3 pb-80 ">
-        <Form inputId="no-hp" judul="No Hp" value={noHP} onChange={handleNoHP}  placeholder="Masukkan nomor hp" />
-        <Form inputId="nama" judul="Nama Pemesan" value={nama} onChange={handleNama} placeholder="Masukkan nama" />
-        <Form
-          inputId="no-meja"
-          judul="Nomor Meja"
-          placeholder="Masukkan nomor meja"
-          value={
-            reserveNumber === 'false' || reserveNumber === 'null'
-              ? ''
-              : reserveNumber && reserveNumber.toUpperCase()
-          }
-          onChange={handleReserve}
-        />
-      </div>
+        <div className="w-full mt-3 pb-80 ">
+          <Form inputId="no-hp" judul="No Hp" value={noHP} onChange={handleNoHP}  placeholder="Masukkan nomor hp" />
+          <Form inputId="nama" judul="Nama Pemesan" value={nama} onChange={handleNama} placeholder="Masukkan nama" />
+          <Form
+            inputId="no-meja"
+            judul="Nomor Meja"
+            placeholder="Masukkan nomor meja"
+            value={
+              reserveNumber === 'false' || reserveNumber === 'null'
+                ? ''
+                : reserveNumber && reserveNumber.toUpperCase()
+            }
+            onChange={handleReserve}
+          />
+        </div>
 
-      <div className="w-full md:max-w-lg fixed bottom-0 bg-warnaBg flex flex-row p-3 justify-center items-center rounded-t-md">
-        <h3 className="text-sm sm:text-md font-bold text-black ml-3">
-          Total Bayar:{' '}
-        </h3>
-        <p className="text-sm sm:text-md font-bold text-black ml-1">
-          {formatRupiah(totalPrice)}
-          {/* Rp.17000 */}
-        </p>
-        <button
-          type="submit"
-          className="p-2 sm:p-3 w-[40%] sm:w-[50%] mx-auto bg-[#98694F] rounded-lg "
-        >
-          <h3 className="text-white text-sm sm:text-md font-semibold">
-            Pilih metode pembayaran
+        <div className="w-full md:max-w-lg fixed bottom-0 bg-warnaBg flex flex-row p-3 justify-center items-center rounded-t-md">
+          <h3 className="text-sm sm:text-md font-bold text-black ml-3">
+            Total Bayar:{' '}
           </h3>
-        </button>
-      </div>
-    </form>
+          <p className="text-sm sm:text-md font-bold text-black ml-1">
+            {formatRupiah(totalPrice)}
+            {/* Rp.17000 */}
+          </p>
+          <button
+            type="submit"
+            className="p-2 sm:p-3 w-[40%] sm:w-[50%] mx-auto bg-[#98694F] rounded-lg "
+          >
+            <h3 className="text-white text-sm sm:text-md font-semibold">
+              Pilih metode pembayaran
+            </h3>
+          </button>
+        </div>
+      </form>
+    </>
   );
 }
 
