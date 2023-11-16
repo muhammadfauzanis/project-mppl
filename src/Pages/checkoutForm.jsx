@@ -70,7 +70,7 @@ function CheckoutForm() {
           judul="Nomor Meja"
           placeholder="Masukkan nomor meja"
           value={
-            reserveNumber === 'false'
+            reserveNumber === 'false' || reserveNumber === 'null'
               ? ''
               : reserveNumber && reserveNumber.toUpperCase()
           }

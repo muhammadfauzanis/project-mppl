@@ -108,7 +108,7 @@ function OrderDetails() {
       </div>
       <div className="flex justify-between py-[17px] px-6 ">
         <div className="">
-          <h2 className="font-bold text-lg ">Java Caffe</h2>
+          <h2 className="font-bold text-lg ">Jaba Caffe</h2>
           <p className="text-xs">Alamat Palsu</p>
         </div>
         <p className="text-2xl font-bold">{reserve && reserve.toUpperCase()}</p>

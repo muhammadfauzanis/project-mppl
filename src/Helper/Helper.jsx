@@ -26,8 +26,8 @@ export const Helper = () => {
 
     const baseURLAPI = (url = '') => {
         url     = url.replace(/^[/]/g,'');
-        const baseURL   = 'http://127.0.0.1:8000/api/';
-        // const baseURL   = 'https://jaba-coffee.000webhostapp.com/api/';
+        // const baseURL   = 'http://127.0.0.1:8000/api/';
+        const baseURL   = 'https://jaba-coffee.000webhostapp.com/api/';
         return baseURL + url;
     }
 
