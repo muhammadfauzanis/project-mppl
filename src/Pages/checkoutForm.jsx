@@ -15,6 +15,7 @@ function CheckoutForm() {
 
   const location = useLocation();
   const params = new URLSearchParams(location.search);
+  const buyer_info  = JSON.parse(localStorage.getItem("buyer_info"));
   const reserve = params.get('reserve');
   const id_menu = params.get('menu');
 
@@ -36,19 +37,31 @@ function CheckoutForm() {
     setReserveNumber(event.target.value);
   };
 
+  const [nama, setNama] = useState(buyer_info?.nama);
+  const handleNama = (event) => {
+    setNama(event.target.value);
+  };
+
+  const [noHP, setNoHP] = useState(buyer_info?.no_hp);
+  const handleNoHP = (event) => {
+    setNoHP(event.target.value);
+  };
+
   const handleForm = (e) => {
     e.preventDefault();
-    const noHP = document.getElementById('no-hp').value;
-    const nama = document.getElementById('nama').value;
-    const reserve = document.getElementById('no-meja').value;
 
-    navigate(`/order-detail?no_hp=${noHP}&nama=${nama}&reserve=${reserve}`);
+    localStorage.setItem("buyer_info",JSON.stringify({
+      no_hp   : noHP,
+      nama   : nama,
+      no_meja   : reserveNumber,
+    }));
+    navigate(`/order-detail`);
   };
   return (
     <form onSubmit={handleForm} className="h-full bg-white max-w-lg mx-auto ">
       <div className="w-full bg-[#98694F]  p-5">
         <Link
-          to={id_menu !== null ? `/product-detail?menu=${id_menu}` : `/`}
+          to={id_menu !== null ? `/product-detail?menu=${id_menu}` : `/?reserve=${reserveNumber}`}
           className="cursor-pointer"
         >
           <BsArrowLeft size={30} className="text-white" />
@@ -63,8 +76,8 @@ function CheckoutForm() {
       </div>
 
       <div className="w-full mt-3 pb-80 ">
-        <Form inputId="no-hp" judul="No Hp" placeholder="Masukkan nomor hp" />
-        <Form inputId="nama" judul="Nama Pemesan" placeholder="Masukkan nama" />
+        <Form inputId="no-hp" judul="No Hp" value={noHP} onChange={handleNoHP}  placeholder="Masukkan nomor hp" />
+        <Form inputId="nama" judul="Nama Pemesan" value={nama} onChange={handleNama} placeholder="Masukkan nama" />
         <Form
           inputId="no-meja"
           judul="Nomor Meja"

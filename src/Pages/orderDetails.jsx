@@ -20,9 +20,10 @@ function OrderDetails() {
 
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const reserve = params.get('reserve');
-  const no_hp = params.get('no_hp');
-  const nama = params.get('nama');
+  const buyer_info  = JSON.parse(localStorage.getItem("buyer_info"));
+  const reserve = buyer_info.no_meja;
+  const no_hp = buyer_info.no_hp;
+  const nama = buyer_info.nama;
 
   const handleList = async () => {
     const response = await axios
@@ -100,7 +101,7 @@ function OrderDetails() {
   return (
     <div className="max-w-lg  mx-auto bg-warnaBg ">
       <div className="flex items-center  p-3 bg-[#98694F] text-white z-50">
-        <Link to={`/checkout-form?reserve=false`} className="cursor-pointer">
+        <Link to={`/checkout-form?reserve=${reserve}`} className="cursor-pointer">
           <BsArrowLeft size={30} className="text-white" />
         </Link>
 
