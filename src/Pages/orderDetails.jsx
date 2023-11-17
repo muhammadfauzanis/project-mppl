@@ -13,7 +13,7 @@ function OrderDetails() {
   let navigate    = useNavigate();
   const { listCart } = Cart();
   const { baseURLAPI, formatRupiah,currentDate } = Helper();
-  const { showToastError } = Toast();
+  const { showToastError, showToastSuccess } = Toast();
   const [listItem, setListItem] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [openPayment, setOpenPayment] = useState(false);
@@ -57,7 +57,7 @@ function OrderDetails() {
     .then((response) => {
       setIsSubmit(false);
       localStorage.removeItem("cart");
-      alert(response.data.message);
+      showToastSuccess(response?.data?.message);
       navigate('/invoices');
     }).catch((error) => {
       setIsSubmit(false);

@@ -10,7 +10,7 @@ function Navbar() {
       <img src="/logo.png" alt="" />
       <h1 className="text-lg sm:text-xl text-[#414141]">Java Caffe</h1>
       <h1 className="text-lg sm:text-xl text-[#414141]">
-        {reserve && reserve.toUpperCase()}
+        {(reserve && reserve !== "false") && reserve.toUpperCase()}
       </h1>
     </div>
   );

@@ -61,7 +61,7 @@ function CheckoutForm() {
       showToastError("Nama perlu diisi!");
       return false;
     }
-    if(reserveNumber === ""){
+    if(reserveNumber === "" || reserveNumber === "false"){
       showToastError("No Meja perlu diisi!");
       return false;
     }
