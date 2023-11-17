@@ -1,16 +1,15 @@
 import { BsArrowLeft, BsCartFill, BsFillCartPlusFill } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 import PlusMinusButton from "../Components/PlusMinusButton";
 import axios from "axios";
 import { Helper } from "../Helper/Helper";
 import { Cart } from "../Helper/Cart";
 import Loading from "../Components/Loading";
+import { Toast } from "../Helper/Toast";
 
 function ProductDetail() {
-  const [count, setCount] = useState(0);
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const reserve = params.get("reserve");
@@ -18,13 +17,14 @@ function ProductDetail() {
   const [isLoading, setIsLoading] = useState(true);
   const { formatRupiah , baseURLAPI} = Helper();
   const { addCart, getQty } = Cart();
+  const { showToastSuccess } = Toast();
 
   // GET PRODUCTS
   const [product, setProduct] = useState([]);
   const fetchDataMenu = async () => {
     try {
       const response = await axios.get(baseURLAPI(`menu/${id_menu}`));
-      setProduct(response.data[0]);
+      setProduct(response.data);
       
       setTimeout(() => {
         setIsLoading(false);
@@ -37,25 +37,13 @@ function ProductDetail() {
     fetchDataMenu();
   }, []);
 
-  // TOAST SUKSES
-  const showToastSuccess = (msg) => {
-    toast.success(msg, {
-      position: "top-center",
-      autoClose: 1000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-  };
+  
   return (
     <div>
       <ToastContainer />
       <div className="bg-warnaBg mx-auto my-0 max-w-lg h-full pb-8">
         <div className="flex justify-between items-center bg-[#98694F] px-7 py-5">
-          <Link to="/">
+          <Link to={`/?reserve=${reserve == null ? false : reserve}`}>
             <BsArrowLeft size={30} className="z-50 text-white" />
           </Link>
           <Link

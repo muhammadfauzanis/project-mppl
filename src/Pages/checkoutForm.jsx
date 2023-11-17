@@ -5,10 +5,13 @@ import { useEffect, useState } from 'react';
 import { Cart } from '../Helper/Cart';
 import { Helper } from '../Helper/Helper';
 import axios from 'axios';
+import { Toast } from '../Helper/Toast';
+import { ToastContainer } from 'react-toastify';
 
 function CheckoutForm() {
   const { listCart } = Cart();
   const { baseURLAPI, formatRupiah } = Helper();
+  const { showToastError } = Toast();
   const [totalPrice, setTotalPrice] = useState(0);
 
   const navigate = useNavigate();
@@ -50,15 +53,35 @@ function CheckoutForm() {
   const handleForm = (e) => {
     e.preventDefault();
 
-    localStorage.setItem("buyer_info",JSON.stringify({
-      no_hp   : noHP,
-      nama   : nama,
-      no_meja   : reserveNumber,
-    }));
-    navigate(`/order-detail`);
+    if(noHP === ""){
+      showToastError("No HP perlu diisi!");
+      return false;
+    }
+    if(nama === ""){
+      showToastError("Nama perlu diisi!");
+      return false;
+    }
+    if(reserveNumber === ""){
+      showToastError("No Meja perlu diisi!");
+      return false;
+    }
+
+    const cart  = JSON.parse(localStorage.getItem("cart"));
+    if(cart?.length > 0){
+      localStorage.setItem("buyer_info",JSON.stringify({
+        no_hp   : noHP,
+        nama   : nama,
+        no_meja   : reserveNumber,
+      }));
+      navigate(`/order-detail`);
+    }else{
+      showToastError("Pilih menu terlebih dahulu!");
+    }
+
   };
   return (
     <>
+      <ToastContainer/>
       <form onSubmit={handleForm} className="h-full bg-white max-w-lg mx-auto ">
         <div className="w-full bg-[#98694F]  p-5">
           <Link
