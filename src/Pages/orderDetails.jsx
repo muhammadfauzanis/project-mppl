@@ -53,6 +53,7 @@ function OrderDetails() {
     },{withCredentials:true})
     .then((response) => {
       setIsSubmit(false);
+      localStorage.removeItem("cart");
       alert(response.data.message);
       navigate('/invoices');
     }).catch((error) => {
