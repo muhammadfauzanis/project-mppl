@@ -38,10 +38,70 @@ export const Helper = () => {
         return description;
     }
 
+    const currentDate = () => {
+        const M_Date = new Date();
+        let year = M_Date.getFullYear();
+        let date = M_Date.getDate() > 9 ? M_Date.getDate() : '0' + M_Date.getDate();
+        let monthIndex = M_Date.getMonth();
+        let month = '';
+
+        switch (monthIndex) {
+        case 0:
+            month = 'Januari';
+            break;
+
+        case 1:
+            month = 'Februari';
+            break;
+
+        case 2:
+            month = 'Maret';
+            break;
+
+        case 3:
+            month = 'April';
+            break;
+
+        case 4:
+            month = 'Mei';
+            break;
+
+        case 5:
+            month = 'Juni';
+            break;
+
+        case 6:
+            month = 'Juli';
+            break;
+
+        case 7:
+            month = 'Agustus';
+            break;
+
+        case 8:
+            month = 'September';
+            break;
+
+        case 9:
+            month = 'Oktober';
+            break;
+
+        case 10:
+            month = 'November';
+            break;
+
+        case 11:
+            month = 'Desember';
+            break;
+        }
+        return `${date} ${month} ${year}`;
+    };
+
     return {
         isFixed,
         formatRupiah,
         baseURLAPI,
-        descriptionShort
+        descriptionShort,
+        currentDate
     }
 };

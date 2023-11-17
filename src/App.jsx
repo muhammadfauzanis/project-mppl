@@ -8,6 +8,7 @@ import NotFoundPage from './Pages/notFoundPage';
 import AdminLogin from './Pages/Admin/login';
 import AdminDashboard from './Pages/Admin/dashboard';
 import AdminMenu from './Pages/Admin/menu';
+import Invoices from './Pages/invoices';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/product-detail" element={<ProductDetail />} />
           <Route path="/checkout-form" element={<CheckoutForm />} />
           <Route path="/order-detail" element={<OrderDetails />} />
+          <Route path="/invoices" element={<Invoices />} />
           <Route path="/*" element={<NotFoundPage />} />
 
 

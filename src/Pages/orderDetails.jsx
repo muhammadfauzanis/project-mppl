@@ -3,19 +3,19 @@ import { Cart } from '../Helper/Cart';
 import { Helper } from '../Helper/Helper';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link, useLocation } from 'react-router-dom';
-// import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
-// import { MdKeyboardArrowRight } from 'react-icons/md';
-// import { AiOutlineClose } from 'react-icons/ai';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import PaymentMethod from '../Components/PaymentMethod';
+import Loading from '../Components/Loading';
 
 function OrderDetails() {
+  let navigate    = useNavigate();
   const { listCart } = Cart();
-  const { baseURLAPI, formatRupiah } = Helper();
+  const { baseURLAPI, formatRupiah,currentDate } = Helper();
   const [listItem, setListItem] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [dateTime, setDateTime] = useState('');
   const [openPayment, setOpenPayment] = useState(false);
+  const [orderType, setOrderType] = useState('');
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const location = useLocation();
   const params = new URLSearchParams(location.search);
@@ -33,68 +33,36 @@ function OrderDetails() {
       });
   };
 
-  const handleDateTime = () => {
-    const M_Date = new Date();
-    let year = M_Date.getFullYear();
-    let date = M_Date.getDate() > 9 ? M_Date.getDate() : '0' + M_Date.getDate();
-    let monthIndex = M_Date.getMonth();
-    let month = '';
+  
 
-    switch (monthIndex) {
-      case 0:
-        month = 'Januari';
-        break;
+  const handleSubmit = async (methodType) => {
+    const buyer_info  = JSON.parse(localStorage.getItem("buyer_info"));
+    const cart        = JSON.parse(localStorage.getItem("cart"));
+    const device      = navigator.userAgent;
+    setIsSubmit(true);
+    setOpenPayment(false);
 
-      case 1:
-        month = 'Februari';
-        break;
-
-      case 2:
-        month = 'Maret';
-        break;
-
-      case 3:
-        month = 'April';
-        break;
-
-      case 4:
-        month = 'Mei';
-        break;
-
-      case 5:
-        month = 'Juni';
-        break;
-
-      case 6:
-        month = 'Juli';
-        break;
-
-      case 7:
-        month = 'Agustus';
-        break;
-
-      case 8:
-        month = 'September';
-        break;
-
-      case 9:
-        month = 'Oktober';
-        break;
-
-      case 10:
-        month = 'November';
-        break;
-
-      case 11:
-        month = 'Desember';
-        break;
-    }
-    setDateTime(`${date} ${month} ${year}`);
-  };
+    await axios.post(baseURLAPI("orders"),{
+      nama_pemesan : buyer_info.nama,
+      no_wa_pemesan : buyer_info.no_hp,
+      no_meja : buyer_info.no_meja,
+      jenis_pembayaran : methodType,
+      status_pembayaran : orderType,
+      menu  : cart,
+      device_name : device
+    },{withCredentials:true})
+    .then((response) => {
+      setIsSubmit(false);
+      alert(response.data.message);
+      navigate('/invoices');
+    }).catch((error) => {
+      setIsSubmit(false);
+      alert(error?.response?.data?.message);
+    })
+  }
 
   useEffect(() => {
     handleList();
-    handleDateTime();
   }, []);
 
   return (
@@ -126,7 +94,7 @@ function OrderDetails() {
         </div>
         <div className="mt-[20px] border-t-2 border-neutral-400 pt-[10px] px4   ">
           <p>Makan di Tempat</p>
-          <p>{dateTime}</p>
+          <p>{currentDate()}</p>
         </div>
       </div>
 
@@ -149,27 +117,6 @@ function OrderDetails() {
             </div>
           );
         })}
-        {/* <div className="flex justify-between items-center px-5 py-5 border-b-2 border-neutral-400 ">
-          <div className=" flex gap-x-7">
-            <p>Cafe Latte</p>
-            <p className="text-[#98694F]">1x</p>
-          </div>
-          <p>Rp.17.000</p>
-        </div>
-        <div className="flex justify-between items-center px-5 py-5 border-b-2 border-neutral-400 ">
-          <div className=" flex gap-x-7">
-            <p>Cafe Latte</p>
-            <p className="text-[#98694F]">1x</p>
-          </div>
-          <p>Rp.17.000</p>
-        </div>
-        <div className="flex justify-between items-center px-5 py-5 border-b-2 border-neutral-400 ">
-          <div className=" flex gap-x-7">
-            <p>Cafe Latte</p>
-            <p className="text-[#98694F]">1x</p>
-          </div>
-          <p>Rp.17.000</p>
-        </div> */}
         <div className="flex justify-between items-center px-5 py-5 pb-5">
           <div className=" flex gap-x-7">
             <p className="font-bold">Total</p>
@@ -182,13 +129,13 @@ function OrderDetails() {
       <div className="w-full md:max-w-lg fixed  bottom-0 flex p-3 justify-center items-center gap-x-4 rounded-t-md py-[19px] bg-white py-3">
         <button
           className=" border-2 border-[#98694F] px-[20px] py-[10px] md:px-[42px] md:py-[14px] rounded-md text-[#98694F]"
-          onClick={() => setOpenPayment(!openPayment)}
+          onClick={() => {setOrderType('paylater');setOpenPayment(!openPayment)}}
         >
           Bayar Nanti
         </button>
         <button
           className="bg-[#98694F] px-[20px] py-[10px] md:px-[42px] md:py-[14px] rounded-md text-white "
-          onClick={() => setOpenPayment(!openPayment)}
+          onClick={() => {setOrderType('unpaid');setOpenPayment(!openPayment)}}
         >
           Bayar Sekarang
         </button>
@@ -198,29 +145,13 @@ function OrderDetails() {
         } `}
       >
         {/* Payment method container */}
-        <PaymentMethod setOpenPayment={setOpenPayment} />
+        <PaymentMethod handleSubmit={handleSubmit} setOpenPayment={setOpenPayment} />
+      </div>
+      <div className={`fixed top-0 left-0 right-0 ${!isSubmit && "hidden"} bottom-0 text-white flex items-center justify-center bg-gray-800 bg-opacity-50`}>
+        <Loading/>
       </div>
     </div>
   );
 }
 
 export default OrderDetails;
-
-// import { useState, useEffect } from "react";
-// function OrderDetails() {
-//   const [userDevice, setUserDevice] = useState("");
-
-//   useEffect(() => {
-//     const userAgent = navigator.userAgent;
-//     setUserDevice(userAgent);
-//   }, []);
-
-//   return (
-//     <div>
-//       <h2>Informasi Perangkat Pengguna</h2>
-//       <p>Nama Perangkat: {userDevice}</p>
-//     </div>
-//   );
-// }
-
-// export default OrderDetails;
