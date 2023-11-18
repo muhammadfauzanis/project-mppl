@@ -24,7 +24,7 @@ function Login() {
 		await axios.post(baseURLAPI("/admin/login"),formData,{withCredentials : true})
 		.then(response => {
 			setIsLoading(false);
-			setAsLogin('admin');
+			setAsLogin(response.data.user.role);
 		}).catch(error => {
 			if(error.response){
 				setErrorMsg(error.response.data.message);
@@ -42,7 +42,7 @@ function Login() {
 
 	useEffect(() => {
 		if(authed){
-			return navigate("/admin/dashboard")
+			return navigate("/panel/dashboard")
 		}
 	},[authed])
 

@@ -31,12 +31,12 @@ export function useAuth() {
 			cookie.remove('role', {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});
 			setAuthed(false);
 			setRole('');
-			navigate("/admin/login");
+			navigate("/panel/login");
 		})
 	}
 
 	const checkIsLogin = async () => {
-		if(authed){
+		// if(authed){
 			await axios.get(baseURLAPI("/admin/user"),{withCredentials: true})
 			.then((response) => {
 				setAsLogin(response.data.role)
@@ -47,10 +47,10 @@ export function useAuth() {
 				setAuthed(false);
 				setRole('');
 			})
-		}else{
-			setAuthed(false);
-			setRole('');
-		}
+		// }else{
+		// 	setAuthed(false);
+		// 	setRole('');
+		// }
 	}
 
 	React.useEffect(() => {

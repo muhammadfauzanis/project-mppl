@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../Helper/useAuth';
 import { Link, useNavigate } from 'react-router-dom';
-import AdminNavbar from '../../Components/AdminNavbar';
+import PanelNavbar from '../../Components/PanelNavbar';
 
 function Dashboard() {
 
@@ -10,15 +10,19 @@ function Dashboard() {
 
 	useEffect(() => {
 		if(!authed){
-			return navigate("/admin/login")
+			return navigate("/panel/login")
 		}
 	},[authed])
 
 	return (
 		<>
-			<AdminNavbar page={"dashboard"}>
-				Hello World
-			</AdminNavbar>
+			<PanelNavbar page={"dashboard"}>
+				<ul>
+					<li>Box (Jumlah Menu, Jumlah User)</li>
+					<li>Chart (Penjualan Berdasarkan Waktu (Perminggu/bulan/3 bulan))</li>
+					<li>Table (Daftar 5 Menu Terlaris)</li>
+				</ul>
+			</PanelNavbar>
 		</>
 	);
 }

@@ -4,11 +4,14 @@ import CheckoutForm from './Pages/checkoutForm';
 import OrderDetails from './Pages/orderDetails';
 import HomeMenu from './Pages/homeMenu';
 import NotFoundPage from './Pages/notFoundPage';
-
-import AdminLogin from './Pages/Admin/login';
-import AdminDashboard from './Pages/Admin/dashboard';
-import AdminMenu from './Pages/Admin/menu';
 import Invoices from './Pages/invoices';
+
+import PanelLogin from './Pages/Panel/login';
+import PanelDashboard from './Pages/Panel/dashboard';
+import PanelMenu from './Pages/Panel/menu';
+import PanelOrders from './Pages/Panel/orders';
+import PanelCategoryMenu from './Pages/Panel/categoryMenu';
+import PanelUsers from './Pages/Panel/users';
 
 function App() {
   return (
@@ -22,10 +25,12 @@ function App() {
           <Route path="/invoices" element={<Invoices />} />
           <Route path="/*" element={<NotFoundPage />} />
 
-
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/menu" element={<AdminMenu />} />
+          <Route path="/panel/login" element={<PanelLogin />} />
+          <Route path="/panel/dashboard" element={<PanelDashboard />} />
+          <Route path="/panel/orders" element={<PanelOrders />} />
+          <Route path="/panel/menu" element={<PanelMenu />} />
+          <Route path="/panel/kategori_menu" element={<PanelCategoryMenu />} />
+          <Route path="/panel/users" element={<PanelUsers />} />
         </Routes>
       </Router>
     </div>
