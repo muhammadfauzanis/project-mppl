@@ -12,11 +12,19 @@ import PanelMenu from './Pages/Panel/menu';
 import PanelOrders from './Pages/Panel/orders';
 import PanelCategoryMenu from './Pages/Panel/categoryMenu';
 import PanelUsers from './Pages/Panel/users';
+import { useAuth } from './Helper/useAuth';
+import { useEffect } from 'react';
 
 function App() {
+  const {checkisLogin} = useAuth();
+  const { loginUserOnStartup } = useAuth();
+
+  useEffect(() => {
+      loginUserOnStartup();
+  }, []);
+  
   return (
     <div className="App">
-      <Router>
         <Routes>
           <Route path="/" element={<HomeMenu />} />
           <Route path="/product-detail" element={<ProductDetail />} />
@@ -32,7 +40,6 @@ function App() {
           <Route path="/panel/kategori_menu" element={<PanelCategoryMenu />} />
           <Route path="/panel/users" element={<PanelUsers />} />
         </Routes>
-      </Router>
     </div>
   );
 }

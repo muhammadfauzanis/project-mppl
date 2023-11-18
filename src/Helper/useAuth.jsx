@@ -35,7 +35,7 @@ export function useAuth() {
 		})
 	}
 
-	const checkIsLogin = async () => {
+	const loginUserOnStartup = async () => {
 		if(authed){
 			await axios.get(baseURLAPI("/admin/user"),{withCredentials: true})
 			.then((response) => {
@@ -46,21 +46,20 @@ export function useAuth() {
 				cookie.remove('role', {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});
 				setAuthed(false);
 				setRole('');
+				navigate("/panel/login");
 			})
 		}else{
 			setAuthed(false);
 			setRole('');
+			navigate("/panel/login");
 		}
 	}
-
-	React.useEffect(() => {
-		checkIsLogin();
-	},[])
 
 	return {
 		authed,
 		role,
 		logout,
 		setAsLogin,
+		loginUserOnStartup
 	};
 }

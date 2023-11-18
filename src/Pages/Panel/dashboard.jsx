@@ -6,7 +6,7 @@ import PanelNavbar from '../../Components/PanelNavbar';
 function Dashboard() {
 
 	let navigate		= useNavigate();
-	const {authed} 		= useAuth();
+	const {authed,role,logout} 		= useAuth();
 
 	useEffect(() => {
 		if(!authed){
