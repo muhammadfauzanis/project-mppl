@@ -5,8 +5,8 @@ import PanelNavbar from '../../Components/PanelNavbar';
 
 function Users() {
 
-	let navigate			= useNavigate();
-	const {authed,role} 	= useAuth();
+	let navigate		= useNavigate();
+	const {authed,role} = useAuth();
 
 	useEffect(() => {
 		if(!authed){

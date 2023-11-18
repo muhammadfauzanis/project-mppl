@@ -5,8 +5,8 @@ import PanelNavbar from '../../Components/PanelNavbar';
 
 function Orders() {
 
-	let navigate			= useNavigate();
-	const {authed} 			= useAuth();
+	let navigate		= useNavigate();
+	const {authed} 		= useAuth();
 
 	useEffect(() => {
 		if(!authed){

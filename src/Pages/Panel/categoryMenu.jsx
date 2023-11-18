@@ -5,8 +5,8 @@ import PanelNavbar from '../../Components/PanelNavbar';
 
 function CategoryMenu() {
 
-	let navigate			= useNavigate();
-	const {authed,role} 	= useAuth();
+	let navigate		= useNavigate();
+	const {authed} 		= useAuth();
 
 	useEffect(() => {
 		if(!authed){

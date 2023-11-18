@@ -8,8 +8,7 @@ export function useAuth() {
 	let navigate 				= useNavigate();
 	const cookie 				= new Cookies();
 	const [authed, setAuthed] 	= React.useState(cookie.get("is_auth"));
-	const [role, setRole] 		= React.useState('');
-	const [user, setUser] 		= React.useState([]);
+	const [role, setRole] 		= React.useState(cookie.get("role"));
 	const {baseURLAPI}			= Helper();
 
 	const getAuthCookieExpiration = () => {	
@@ -18,22 +17,20 @@ export function useAuth() {
         return date;
     }
 
-	const setAsLogin = (data_user) => {
+	const setAsLogin = (role) => {
 		cookie.set('is_auth', true, {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});
+		cookie.set('role', role, {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});
 		setAuthed(true);
-		if(data_user.id !== user.id){
-			setUser(data_user);
-			setRole(data_user.role);
-		}
+		setRole(role);
 	}
 
 	const logout = async () => {
 		await axios.post(baseURLAPI("/admin/logout"),{},{withCredentials: true})
 		.then(() => {
 			cookie.remove('is_auth', {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});
+			cookie.remove('role', {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});
 			setAuthed(false);
 			setRole('');
-			setUser([]);
 			navigate("/panel/login");
 		})
 	}
@@ -42,10 +39,11 @@ export function useAuth() {
 		if(authed){
 			await axios.get(baseURLAPI("/admin/user"),{withCredentials: true})
 			.then((response) => {
-				setAsLogin(response.data)
+				setAsLogin(response.data.role)
 			}) 
 			.catch(() => {
 				cookie.remove('is_auth', {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});
+				cookie.remove('role', {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});
 				setAuthed(false);
 				setRole('');
 			})
@@ -57,12 +55,11 @@ export function useAuth() {
 
 	React.useEffect(() => {
 		checkIsLogin();
-	},[user])
+	},[])
 
 	return {
 		authed,
 		role,
-		user,
 		logout,
 		setAsLogin,
 	};
