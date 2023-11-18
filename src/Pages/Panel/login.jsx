@@ -24,7 +24,7 @@ function Login() {
 		await axios.post(baseURLAPI("/admin/login"),formData,{withCredentials : true})
 		.then(response => {
 			setIsLoading(false);
-			setAsLogin(response.data.user.role);
+			setAsLogin(response.data.user);
 		}).catch(error => {
 			if(error.response){
 				setErrorMsg(error.response.data.message);

@@ -8,7 +8,8 @@ export function useAuth() {
 	let navigate 				= useNavigate();
 	const cookie 				= new Cookies();
 	const [authed, setAuthed] 	= React.useState(cookie.get("is_auth"));
-	const [role, setRole] 		= React.useState(cookie.get("role"));
+	const [role, setRole] 		= React.useState('');
+	const [user, setUser] 		= React.useState([]);
 	const {baseURLAPI}			= Helper();
 
 	const getAuthCookieExpiration = () => {	
@@ -17,49 +18,51 @@ export function useAuth() {
         return date;
     }
 
-	const setAsLogin = (role) => {
+	const setAsLogin = (data_user) => {
 		cookie.set('is_auth', true, {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});
-		cookie.set('role', role, {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});
 		setAuthed(true);
-		setRole(role);
+		if(data_user.id !== user.id){
+			setUser(data_user);
+			setRole(data_user.role);
+		}
 	}
 
 	const logout = async () => {
 		await axios.post(baseURLAPI("/admin/logout"),{},{withCredentials: true})
 		.then(() => {
 			cookie.remove('is_auth', {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});
-			cookie.remove('role', {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});
 			setAuthed(false);
 			setRole('');
+			setUser([]);
 			navigate("/panel/login");
 		})
 	}
 
 	const checkIsLogin = async () => {
-		// if(authed){
+		if(authed){
 			await axios.get(baseURLAPI("/admin/user"),{withCredentials: true})
 			.then((response) => {
-				setAsLogin(response.data.role)
+				setAsLogin(response.data)
 			}) 
 			.catch(() => {
 				cookie.remove('is_auth', {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});
-				cookie.remove('role', {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});
 				setAuthed(false);
 				setRole('');
 			})
-		// }else{
-		// 	setAuthed(false);
-		// 	setRole('');
-		// }
+		}else{
+			setAuthed(false);
+			setRole('');
+		}
 	}
 
 	React.useEffect(() => {
 		checkIsLogin();
-	},[])
+	},[user])
 
 	return {
 		authed,
 		role,
+		user,
 		logout,
 		setAsLogin,
 	};
