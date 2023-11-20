@@ -36,23 +36,27 @@ export function useAuth() {
 	}
 
 	const loginUserOnStartup = async () => {
-		if(authed){
-			await axios.get(baseURLAPI("/admin/user"),{withCredentials: true})
-			.then((response) => {
-				setAsLogin(response.data.role)
-			}) 
-			.catch(() => {
-				cookie.remove('is_auth', {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});
-				cookie.remove('role', {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});
+		if(location.pathname.split('/')[1] === "panel"){
+
+			if(authed){
+				await axios.get(baseURLAPI("/admin/user"),{withCredentials: true})
+				.then((response) => {
+					setAsLogin(response.data.role)
+				}) 
+				.catch(() => {
+					cookie.remove('is_auth', {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});
+					cookie.remove('role', {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});
+					setAuthed(false);
+					setRole('');
+					navigate("/panel/login");
+				})
+			}else{
 				setAuthed(false);
 				setRole('');
 				navigate("/panel/login");
-			})
-		}else{
-			setAuthed(false);
-			setRole('');
-			navigate("/panel/login");
+			}
 		}
+
 	}
 
 	return {
