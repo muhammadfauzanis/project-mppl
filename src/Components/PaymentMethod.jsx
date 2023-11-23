@@ -3,9 +3,9 @@ import { AiOutlineClose } from 'react-icons/ai';
 
 const PaymentMethod = ({ setOpenPayment,handleSubmit }) => {
   const paymentOption = [
-    { paymentName: 'QRIS', imgSrc: '/qris.svg' },
-    { paymentName: 'EDC', imgSrc: '/Mastercard-logo.svg' },
-    { paymentName: 'Cash', imgSrc: '/cash-icon.svg' },
+    { paymentName: 'DANA', imgSrc: '/qris.svg' },
+    { paymentName: 'SHOPEEPAY', imgSrc: '/Mastercard-logo.svg' },
+    { paymentName: 'TUNAI', imgSrc: '/cash-icon.svg' },
   ];
   return (
     <div className="max-w-lg bg-white p-6 rounded-t-lg">

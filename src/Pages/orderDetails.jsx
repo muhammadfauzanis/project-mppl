@@ -50,7 +50,6 @@ function OrderDetails() {
       no_wa_pemesan : buyer_info.no_hp,
       no_meja : buyer_info.no_meja,
       jenis_pembayaran : methodType,
-      status_pembayaran : orderType,
       menu  : cart,
       device_name : device
     },{withCredentials:true})
@@ -58,7 +57,8 @@ function OrderDetails() {
       setIsSubmit(false);
       localStorage.removeItem("cart");
       showToastSuccess(response?.data?.message);
-      navigate('/invoices');
+      navigate('/invoices?no='+response.data.invoice);
+      window.open(response.data.url_redirect);
     }).catch((error) => {
       setIsSubmit(false);
       showToastError(error?.response?.data?.message);
@@ -133,12 +133,12 @@ function OrderDetails() {
 
         <div className="h-[100px]"></div>
         <div className="w-full md:max-w-lg fixed  bottom-0 flex p-3 justify-center items-center gap-x-4 rounded-t-md py-[19px] bg-white py-3">
-          <button
+          {/* <button
             className=" border-2 border-[#98694F] px-[20px] py-[10px] md:px-[42px] md:py-[14px] rounded-md text-[#98694F]"
             onClick={() => {setOrderType('paylater');setOpenPayment(!openPayment)}}
           >
             Bayar Nanti
-          </button>
+          </button> */}
           <button
             className="bg-[#98694F] px-[20px] py-[10px] md:px-[42px] md:py-[14px] rounded-md text-white "
             onClick={() => {setOrderType('unpaid');setOpenPayment(!openPayment)}}
