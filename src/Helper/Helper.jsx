@@ -38,8 +38,8 @@ export const Helper = () => {
         return description;
     }
 
-    const currentDate = () => {
-        const M_Date = new Date();
+    const currentDate = (customDate = '') => {
+        const M_Date = new Date(customDate);
         let year = M_Date.getFullYear();
         let date = M_Date.getDate() > 9 ? M_Date.getDate() : '0' + M_Date.getDate();
         let monthIndex = M_Date.getMonth();
