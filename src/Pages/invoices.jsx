@@ -91,7 +91,7 @@ function Invoices() {
                   className="flex justify-between items-center px-5 py-5 border-b-2 border-neutral-400 "
                 >
                   <div className=" flex gap-x-7">
-                    <p>{row.nama_menu}</p>
+                    <p>{row.menu?.nama_menu}</p>
                     <p className="text-[#98694F]">{row.jumlah_beli}x</p>
                   </div>
                   <p>

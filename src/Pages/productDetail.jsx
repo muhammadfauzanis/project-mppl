@@ -41,8 +41,8 @@ function ProductDetail() {
   return (
     <div>
       <ToastContainer />
-      <div className="bg-warnaBg mx-auto my-0 max-w-lg h-full pb-8">
-        <div className="flex justify-between items-center bg-[#98694F] px-7 py-5">
+      <div className="bg-warnaBg mx-auto my-0 max-w-lg h-full pb-8 relative">
+        <div className="flex absolute top-0 left-0 right-0 z-50 justify-between items-center px-7 py-5">
           <Link to={`/?reserve=${reserve == null ? false : reserve}`}>
             <BsArrowLeft size={30} className="z-50 text-white" />
           </Link>
