@@ -124,7 +124,7 @@ function HomeMenu() {
                               menuId={menu.id_menu}
                               countStart={getQty(menu.id_menu)}
                             />
-                            <button
+                            {/* <button
                               onClick={(event) =>
                                 addCartHandler(event, menu.id_menu)
                               }
@@ -133,7 +133,7 @@ function HomeMenu() {
                                 size={20}
                                 className=" text-[#98694F] my-auto pl-1 sm:pl-0"
                               />
-                            </button>
+                            </button> */}
                           </div>
                         </div>
                       </div>

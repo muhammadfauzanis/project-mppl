@@ -38,10 +38,21 @@ function OrderDetails() {
 
   
 
-  const handleSubmit = async (methodType) => {
+  const handleSubmit = async (methodType) => {  
+
     const buyer_info  = JSON.parse(localStorage.getItem("buyer_info"));
     const cart        = JSON.parse(localStorage.getItem("cart"));
     const device      = navigator.userAgent;
+    
+    if(!cart || cart.length === 0){
+      showToastError("Pilih menu terlebih dahulu!");
+      return false;
+    }
+    if(!buyer_info.nama || buyer_info.nama === ""){
+      showToastError("Isi nama terlebih dahulu!");
+      return false;
+    }
+
     setIsSubmit(true);
     setOpenPayment(false);
 
@@ -57,8 +68,8 @@ function OrderDetails() {
       setIsSubmit(false);
       localStorage.removeItem("cart");
       showToastSuccess(response?.data?.message);
-      navigate('/invoices?no='+response.data.invoice);
       window.open(response.data.url_redirect);
+      navigate('/?reserve='+buyer_info.no_meja);
     }).catch((error) => {
       setIsSubmit(false);
       showToastError(error?.response?.data?.message);
@@ -73,7 +84,7 @@ function OrderDetails() {
     <>
       <ToastContainer/>
       <div className="max-w-lg  mx-auto bg-warnaBg ">
-        <div className="flex items-center  p-3 bg-[#98694F] text-white z-50">
+        <div className="flex items-center  p-5 bg-[#98694F] text-white z-50">
           <Link to={`/checkout-form?reserve=${reserve}`} className="cursor-pointer">
             <BsArrowLeft size={30} className="text-white" />
           </Link>
