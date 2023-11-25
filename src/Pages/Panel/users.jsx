@@ -13,6 +13,7 @@ function Users() {
 
 	const config = {
 		pageLength : [1,10,100],
+		defaultPage : 10,
 		header : [
 			{
 				title : "Username",
@@ -33,10 +34,12 @@ function Users() {
 			},
 			{
 				render : (data) => {
-					return 'okas '+ data.role;
-				}
+					return 'ini nanti menu dropdown ';
+				},
+				orderable : false
 			},
-		]
+		],
+		order : ["role","DESC"]
 	}
 
 	

@@ -6,22 +6,27 @@ function Datatable({config,url}) {
 
 	
 	let defaultClassNameHeader  = "px-6 py-3";
+	let defaultPageLength 	 	= [10,25,50,100];
 	let customConfig 	= config;
 
 	config 	= {
-		pageLength : customConfig?.pageLength || [10,25,50,100],
+		pageLength : customConfig?.pageLength || defaultPageLength,
+		defaultPage : customConfig?.defaultPage || defaultPageLength[0],
 		search : {
 			placeholder : customConfig?.search?.placeholder || "Search"
 		},
 		header : customConfig?.header,
 		body : customConfig?.body,
+		order : customConfig?.order || [config.body[0].data,"ASC"],
 	}
 
 
 	const [data,setDataTable] = useState([]);
 	const [totalPage,setTotalPage] = useState([]);
 	const [currentPage,setCurrentPage] = useState(1);
-	const [limitData,setLimitData] = useState(config.pageLength[0]);
+	const [orderByColumn,setOrderByColumn] = useState(config.order[0]);
+	const [orderByBehav,setOrderByBehav] = useState(config.order[1].toUpperCase());
+	const [limitData,setLimitData] = useState(config.defaultPage);
 	const [searchData,setSearchData] = useState('');
 	const {baseURLAPI} = Helper();
 
@@ -31,7 +36,10 @@ function Datatable({config,url}) {
 			params : {
 				limit : limitData,
 				offset : (currentPage - 1) * limitData,
-				search 	: searchData
+				search 	: searchData,
+				order : [
+					orderByColumn,orderByBehav
+				]
 			}
 		})
 		.then((response) => {
@@ -50,20 +58,40 @@ function Datatable({config,url}) {
 
 	useEffect(() => {
 		handleData()
-	},[limitData,searchData,currentPage]);
+	},[limitData,searchData,currentPage,orderByBehav,orderByColumn]);
 
 	return (
 		<div className='px-5'>
 			<div className='grid grid-cols-2 py-5'>
 				<div className='flex items-center'>
-					<label className="block mr-3 text-sm font-medium text-gray-900 dark:text-white">Limit</label>
-					<select onChange={e => setLimitData(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block py-1 px-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-						{
-							config.pageLength.map(e => (
-								<option key={e} value={e}>{e}</option>
-							))
-						}
-					</select>
+					<div className="flex items-center">
+						<label className="block mr-3 text-sm font-medium text-gray-900 dark:text-white">Limit</label>
+						<select defaultValue={limitData} onChange={e => {setLimitData(e.target.value);setCurrentPage(1)}} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block py-1 px-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+							{
+								config.pageLength.map(e => (
+									<option key={e} value={e}>{e}</option>
+								))
+							}
+						</select>
+					</div>
+					<div className="flex items-center ml-5">
+						<label className="block mr-3 text-sm font-medium text-gray-900 dark:text-white">Sort</label>
+						<select defaultValue={orderByColumn} onChange={e => setOrderByColumn(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block py-1 px-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+							{
+								config.body.map((e,k) => {
+									if(e.orderable !== false){
+										return (
+											<option key={"order_column_"+k} value={e.data}>{config.header[k].title}</option>
+										)
+									}
+								})
+							}
+						</select>
+						<select defaultValue={orderByBehav} onChange={e => setOrderByBehav(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block py-1 px-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+							<option value="ASC">ASC</option>
+							<option value="DESC">DESC</option>
+						</select>
+					</div>
 				</div>
 				<div className='flex items-center justify-end'>
 					<label className="block mr-3 text-sm font-medium text-gray-900 dark:text-white">Search</label>
@@ -123,7 +151,7 @@ function Datatable({config,url}) {
 			<div className='py-5'>
 				<ul className="flex justify-end items-center -space-x-px h-10 text-base">
 					<li key="page_prev">
-						<a href="/#" className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+						<a href="/#" onClick={e => {e.preventDefault(); setCurrentPage(currentPage < 2 ? currentPage-1 : 1)}} className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
 							<span className="sr-only">Previous</span>
 							<svg className="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
 							<path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 1 1 5l4 4"/>
@@ -147,7 +175,7 @@ function Datatable({config,url}) {
 						))
 					}
 					<li key="page_next">
-						<a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+						<a href="/#" onClick={e => {e.preventDefault(); setCurrentPage(currentPage < totalPage.length ? currentPage+1 : totalPage.length)}} className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
 							<span className="sr-only">Next</span>
 							<svg className="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
 							<path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4"/>
