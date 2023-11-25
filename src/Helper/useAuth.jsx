@@ -17,11 +17,11 @@ export function useAuth() {
         return date;
     }
 
-	const setAsLogin = (role) => {
+	const setAsLogin = (user) => {
 		cookie.set('is_auth', true, {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});
-		cookie.set('role', role, {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});
+		cookie.set('role', user.role, {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});
 		setAuthed(true);
-		setRole(role);
+		setRole(user.role);
 	}
 
 	const logout = async () => {
@@ -41,7 +41,7 @@ export function useAuth() {
 			if(authed){
 				await axios.get(baseURLAPI("/admin/user"),{withCredentials: true})
 				.then((response) => {
-					setAsLogin(response.data.role)
+					setAsLogin(response.data)
 				}) 
 				.catch(() => {
 					cookie.remove('is_auth', {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});

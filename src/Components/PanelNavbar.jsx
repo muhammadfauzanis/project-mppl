@@ -8,7 +8,7 @@ function PanelNavbar({children,page}) {
 	const handleLogout = (e) => {
 		e.preventDefault();
 		logout();
-	}
+	}	
 
 	return (
 		<>
