@@ -22,6 +22,7 @@ function Datatable({config,url}) {
 
 
 	const [data,setDataTable] = useState([]);
+	const [isLoading,setIsLoading] = useState(true);
 	const [totalPage,setTotalPage] = useState([]);
 	const [currentPage,setCurrentPage] = useState(1);
 	const [orderByColumn,setOrderByColumn] = useState(config.order[0]);
@@ -31,6 +32,8 @@ function Datatable({config,url}) {
 	const {baseURLAPI} = Helper();
 
 	const handleData = async () => {
+		setIsLoading(true);
+		setDataTable([]);
 		await axios.get(baseURLAPI(url),{
 			withCredentials: true,
 			params : {
@@ -43,6 +46,7 @@ function Datatable({config,url}) {
 			}
 		})
 		.then((response) => {
+			setIsLoading(false);
 			setDataTable(response.data.data);
 
 			let totalPageCount = Math.ceil(response.data.totalData / limitData);
@@ -137,8 +141,15 @@ function Datatable({config,url}) {
 								</>
 							)
 						}
-
-						{ !data || data.length == 0 && (
+						
+						{ isLoading && (
+							<tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+								<td colSpan={config?.header && config.header.length} className="px-6 py-4 text-center">
+									Loading..
+								</td>
+							</tr>
+						)}
+						{ ((!data || data.length == 0) && !isLoading) && (
 							<tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
 								<td colSpan={config?.header && config.header.length} className="px-6 py-4 text-center">
 									Data Tidak Ditemukan
