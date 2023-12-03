@@ -39,7 +39,7 @@ function Users() {
 				orderable : false
 			},
 		],
-		order : ["role","DESC"]
+		// order : ["role","DESC"]
 	}
 
 	
