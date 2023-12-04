@@ -4,6 +4,16 @@ import { useAuth } from "../Helper/useAuth";
 function PanelNavbar({children,page}) {	
 
 	const {logout,role} 			= useAuth();
+
+	const handleCloseAllDropdown    = () => {
+		let drops    = document.querySelectorAll(".dropdown-menu");
+		
+		drops.forEach(drop => {
+			drop.classList.add("hidden")
+		})
+		document.getElementById("backdoor_dropdown").classList.add("hidden");
+	}
+
 	
 	const handleLogout = (e) => {
 		e.preventDefault();
@@ -97,6 +107,8 @@ function PanelNavbar({children,page}) {
 			<div className="p-4 sm:ml-64">
 				{children}
 			</div>
+
+			<div onClick={handleCloseAllDropdown} id='backdoor_dropdown' className='fixed hidden top-0 left-0 right-0 bottom-0'></div>
 		</>
 	);
 }

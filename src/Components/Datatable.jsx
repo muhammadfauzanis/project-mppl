@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Helper } from "../Helper/Helper";
 
-function Datatable({config,url}) {
+function Datatable({config,url,draw}) {
 
 	
 	let defaultClassNameHeader  = "px-6 py-3";
@@ -23,7 +23,7 @@ function Datatable({config,url}) {
 
 	const [data,setDataTable] = useState([]);
 	const [isLoading,setIsLoading] = useState(true);
-	const [totalPage,setTotalPage] = useState([]);
+	const [totalPage,setTotalPage] = useState([]);	
 	const [currentPage,setCurrentPage] = useState(1);
 	const [orderByColumn,setOrderByColumn] = useState(config.order[0]);
 	const [orderByBehav,setOrderByBehav] = useState(config.order[1].toUpperCase());
@@ -62,7 +62,7 @@ function Datatable({config,url}) {
 
 	useEffect(() => {
 		handleData()
-	},[limitData,searchData,currentPage,orderByBehav,orderByColumn]);
+	},[limitData,searchData,currentPage,orderByBehav,orderByColumn,draw]);
 
 	return (
 		<div className='px-5'>
@@ -102,7 +102,7 @@ function Datatable({config,url}) {
 					<input value={searchData} onChange={e => setSearchData(e.target.value)} placeholder={config.search.placeholder} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block py-1 px-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
 				</div>
 			</div>
-			<div className="relative overflow-x-auto">
+			<div className="">
 				<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
 					<thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
 						{config?.header && (
@@ -161,7 +161,7 @@ function Datatable({config,url}) {
 			</div>
 			<div className='py-5'>
 				<ul className="flex justify-end items-center -space-x-px h-10 text-base">
-					<li key="page_prev">
+					<li key="page_0">
 						<a href="/#" onClick={e => {e.preventDefault(); setCurrentPage(currentPage < 2 ? currentPage-1 : 1)}} className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
 							<span className="sr-only">Previous</span>
 							<svg className="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
@@ -185,7 +185,7 @@ function Datatable({config,url}) {
 							</>
 						))
 					}
-					<li key="page_next">
+					<li key="page_9999999999999999">
 						<a href="/#" onClick={e => {e.preventDefault(); setCurrentPage(currentPage < totalPage.length ? currentPage+1 : totalPage.length)}} className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
 							<span className="sr-only">Next</span>
 							<svg className="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
