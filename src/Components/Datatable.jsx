@@ -17,9 +17,9 @@ function Datatable({config,url,draw}) {
 		},
 		header : customConfig?.header,
 		body : customConfig?.body,
-		order : customConfig?.order || [config.body[0].data,"ASC"],
+		data : customConfig?.data,
+		order : customConfig?.order || [config?.body[0]?.data,"ASC"],
 	}
-
 
 	const [data,setDataTable] = useState([]);
 	const [isLoading,setIsLoading] = useState(true);
@@ -42,7 +42,8 @@ function Datatable({config,url,draw}) {
 				search 	: searchData,
 				order : [
 					orderByColumn,orderByBehav
-				]
+				],
+				data 	: config.data
 			}
 		})
 		.then((response) => {
@@ -62,7 +63,7 @@ function Datatable({config,url,draw}) {
 
 	useEffect(() => {
 		handleData()
-	},[limitData,searchData,currentPage,orderByBehav,orderByColumn,draw]);
+	},[limitData,searchData,currentPage,orderByBehav,orderByColumn,draw,config.data]);
 
 	return (
 		<div className='px-5'>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../Helper/useAuth';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import PanelNavbar from '../../Components/PanelNavbar';
 import Datatable from '../../Components/Datatable';
 import axios from 'axios';
@@ -10,6 +10,17 @@ import PopUpAlert from '../../Components/PopUpAlert';
 function Users() {
 
 	let navigate		= useNavigate();
+	const {authed,role} = useAuth();
+	useEffect(() => {
+		if(!authed){
+			return navigate("/panel/login")
+		}
+		if(role !== "admin"){
+			return navigate("/panel/dashboard")
+		}
+	},[authed])
+
+
 	const [isSubmitForm, setIsSubmitForm] = useState(false);
 	const [showModal,setShowModal]  = useState(false);
 	const [error, setError] = useState('');
@@ -22,11 +33,8 @@ function Users() {
 		password : '',
 		role : '',
 	})
-	const {authed,role} = useAuth();
 
 	const config = {
-		pageLength : [1,10,100],
-		defaultPage : 10,
 		header : [
 			{
 				title : "Username",
@@ -192,18 +200,6 @@ function Users() {
 		
 		handleDropdown(e);
 	}
-
-
-	
-
-	useEffect(() => {
-		if(!authed){
-			return navigate("/panel/login")
-		}
-		if(role !== "admin"){
-			return navigate("/panel/dashboard")
-		}
-	},[authed])
 
 
 	return (
