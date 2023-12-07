@@ -46,7 +46,7 @@ function Dashboard() {
 	
 		yAxis: {
 			title: {
-				text: 'Jumlah Pendapatan'
+				text: 'Jumlah Pendapatan (Ro)'
 			}
 		},
 	
@@ -54,17 +54,9 @@ function Dashboard() {
 			categories: chart?.date,
 		},
 	
-		legend: {
-			layout: 'vertical',
-			align: 'right',
-			verticalAlign: 'middle'
-		},
-	
-	
 		series: [{
 			data: chart?.data
 		}],
-	
 		responsive: {
 			rules: [{
 				condition: {
