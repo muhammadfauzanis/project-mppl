@@ -125,7 +125,7 @@ function Datatable({config,url,draw}) {
 											<tr key={"row_"+k} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
 												{
 													config.body.map((e2,k2) => (
-														<td key={"cell_"+k2} className="px-6 py-4">
+														<td key={"cell_"+k2} className={`px-6 py-4 ${e2.className}`}>
 															{(!e2.render && e2.data) && (
 																e[e2.data]
 															)

@@ -71,6 +71,7 @@ function CategoryMenu() {
 			},
 			{
 				data : "deskripsi_menu",
+				className : "text-justify"
 			},
 			{
 				render : (data) => {
