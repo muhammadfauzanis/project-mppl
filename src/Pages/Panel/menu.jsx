@@ -7,7 +7,7 @@ import axios from 'axios';
 import { Helper } from '../../Helper/Helper';
 import PopUpAlert from '../../Components/PopUpAlert';
 
-function CategoryMenu() {
+function Menu() {
 
 	let navigate		= useNavigate();
 	const {authed,role} 		= useAuth();
@@ -385,4 +385,4 @@ function CategoryMenu() {
 	);
 }
 
-export default CategoryMenu;
+export default Menu;
