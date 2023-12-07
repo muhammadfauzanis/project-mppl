@@ -205,14 +205,6 @@ function CategoryMenu() {
 	return (
 		<>
 			<PanelNavbar page={"kategori_menu"}>
-				<ul>
-					<li>GET DATA KATEGORI MENU</li>
-					<li>INSERT DATA KATEGORI MENU</li>
-					<li>UPDATE DATA KATEGORI MENU</li>
-					<li>DELETE DATA KATEGORI MENU</li>
-					<li>KASIR HANYA GET SAJA</li>
-				</ul>
-
 				{ role === "admin" && (
 					<button type="button" onClick={handleModal} className="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
 						<svg className='mr-3' xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><path fill="#ffffff" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
