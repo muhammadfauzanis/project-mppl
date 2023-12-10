@@ -37,9 +37,14 @@ function Invoices() {
     <>
       <div className="max-w-lg  mx-auto bg-warnaBg ">
         <div className="py-[17px] px-6 ">
-          <div className="">
-            <h2 className="font-bold text-lg ">Jaba Caffe</h2>
-            <p className="text-xs">Jl. tak pernah ada Kec. selalu ada Kab. Bandung</p>
+          <div className='flex justify-between'>
+            <div className="">
+              <h2 className="font-bold text-lg ">Jaba Caffe</h2>
+              <p className="text-xs">Jl. tak pernah ada Kec. selalu ada Kab. Bandung</p>
+            </div>
+            <div className='font-bold text-3xl mt-2'>
+              <p>{listItem.no_meja}</p>
+            </div>
           </div>
         </div>
 
